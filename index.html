@@ -1,0 +1,2543 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- =========================
+       SEO BASICS
+  ========================== -->
+  <title>Dark Feed — News, Politica, Mondo, Tecnologia, Finanza</title>
+  <meta name="description" content="Dark Feed: notizie e analisi senza rumore. News, politica, mondo, tecnologia e finanza con contesto e verifica." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0d10" />
+  <link rel="canonical" href="https://darkfeed.online/" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Dark Feed" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:title" content="Dark Feed — News, Politica, Mondo, Tecnologia, Finanza" />
+  <meta property="og:description" content="Notizie e analisi senza rumore: contesto, verifica e approfondimenti." />
+  <meta property="og:url" content="https://darkfeed.it/" />
+  <meta property="og:image" content="https://darkfeed.it/img/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dark Feed — News e analisi" />
+  <meta name="twitter:description" content="Notizie e analisi senza rumore: contesto, verifica e approfondimenti." />
+  <meta name="twitter:image" content="https://darkfeed.it/img/og.jpg" />
+
+  <!-- Optional: favicon -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "name": "Dark Feed",
+    "url": "https://darkfeed.it/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://darkfeed.it/img/logo.png"
+    },
+    "sameAs": [
+      "https://x.com/",
+      "https://www.instagram.com/",
+      "https://www.youtube.com/",
+      "https://open.spotify.com/"
+    ]
+  }
+  </script>
+
+  <style>
+    /* =========================
+       1) THEME TOKENS
+    ========================== */
+    :root{
+      --max: 1080px;
+      --content: 640px;
+      --side: 420px;
+      --gap: 18px;
+
+      --bg: #0b0d10;
+      --text: rgba(231,233,238,.92);
+      --muted: rgba(231,233,238,.58);
+      --link: #7aa2ff;
+
+      --border: rgba(255,255,255,.06);
+      --hairline: rgba(255,255,255,.04);
+      --radius: 10px;
+      --radius-sm: 8px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    /* =========================
+       2) BASE
+    ========================== */
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    html { -webkit-text-size-adjust: 100%; }
+
+    /* Anti-overflow (mobile spill fix) */
+    html, body{
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    @supports not (overflow-x: clip){
+      html, body{ overflow-x: hidden; }
+    }
+
+    body{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .muted{ color: var(--muted); }
+    .small{ font-size: 13px; }
+    .hidden{ display:none !important; }
+    code{
+      background: rgba(255,255,255,.06);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    img, video, iframe{
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Make grid/flex children shrinkable */
+    .layout, .feed, .sidebar, .panel, .post, .newsRailWrap, .topbar, .topbar__grid{
+      max-width: 100%;
+      min-width: 0;
+    }
+    .feed > *, .post > *, .panel > *{ min-width: 0; }
+
+    /* =========================
+       3) TOPBAR / NAVBAR (STICKY)
+    ========================== */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11,13,16,.28);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .topbar__grid{
+      width: 100%;
+      display: grid;
+      grid-template-columns: var(--side) minmax(0, var(--content)) 1fr;
+      gap: var(--gap);
+      align-items: center;
+      padding: 10px 14px 10px 0;
+    }
+
+    @media (max-width: 1040px){
+      .topbar__grid{
+        grid-template-columns: 1fr minmax(0, var(--content)) 1fr;
+        padding-left: 14px;
+      }
+    }
+
+    .topbarLeft{
+      justify-self: start;
+      display: flex;
+      align-items: center;
+      gap: 100px;
+      padding-left: 14px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      opacity: .92;
+      min-width: 0;
+      padding: 6px 6px;
+      border-radius: 10px;
+      transition: background .15s ease, opacity .15s ease;
+      flex: 0 0 auto;
+    }
+    .brand:hover{
+      background: rgba(255,255,255,.04);
+      opacity: 1;
+    }
+    .brand__logo{
+      height: 28px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .topbarActions{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .ctaBtn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(122,162,255,.35);
+      background: rgba(122,162,255,.14);
+      color: rgba(231,233,238,.95);
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: .2px;
+      white-space: nowrap;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .ctaBtn:hover{
+      background: rgba(122,162,255,.22);
+      border-color: rgba(122,162,255,.55);
+      transform: translateY(-1px);
+    }
+
+    .iconBtn{
+      position: relative;
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.03);
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+      flex: 0 0 auto;
+    }
+    .iconBtn:hover{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+      transform: translateY(-1px);
+    }
+    .iconBtn__icon{
+      width: 18px;
+      height: 18px;
+      fill: rgba(231,233,238,.86);
+    }
+
+    .badgeDot{
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(122,162,255,.95);
+      box-shadow: 0 0 0 2px rgba(11,13,16,.95);
+    }
+
+    /* Desktop/tablet default: CTA hidden under 980 */
+    @media (max-width: 980px){
+      .ctaBtn{ display:none; }
+    }
+
+    .nav{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      user-select: none;
+      min-width: 0;
+      max-width: 100%;
+    }
+    .nav__link{
+      color: rgba(231,233,238,.55);
+      padding: 6px 8px;
+      border-radius: 999px;
+      transition: background .15s ease, color .15s ease;
+    }
+    .nav__link:hover{
+      color: rgba(231,233,238,.92);
+      background: rgba(255,255,255,.06);
+    }
+    .nav__link--active{
+      color: rgba(231,233,238,.95);
+      background: rgba(255,255,255,.10);
+    }
+
+    .topbarRight{
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 0;
+      max-width: 100%;
+    }
+    .topbarSearch{
+      display:flex;
+      align-items:center;
+      justify-content: flex-end;
+      min-width: 0;
+      max-width: 100%;
+      flex: 1 1 auto;
+    }
+
+    .topbarSearch__input{
+      width: 260px;
+      max-width: 100%;
+      padding: 7px 12px;
+      font-size: 14px;
+      color: rgba(231,233,238,.90);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 999px;
+      outline: none;
+      transition: background .15s ease, border-color .15s ease, width .18s ease;
+    }
+    .topbarSearch__input::placeholder{
+      color: rgba(231,233,238,.45);
+    }
+    .topbarSearch__input:focus{
+      width: 350px;
+      background: rgba(255,255,255,.08);
+      border-color: rgba(122,162,255,.35);
+    }
+    @media (max-width: 640px){
+      .topbarSearch__input{ width: 140px; }
+      .topbarSearch__input:focus{ width: 220px; }
+    }
+
+    .social{
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+    .social__link{
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.05);
+      background: rgba(255,255,255,.02);
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .social__link:hover{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.08);
+    }
+    .social__icon{
+      width: 16px;
+      height: 16px;
+      fill: rgba(231,233,238,.72);
+    }
+
+    /* =========================
+       3b) NEWS RAIL (NON STICKY)
+    ========================== */
+    .newsRailWrap{
+      width: 100%;
+      border-bottom: 1px solid var(--hairline);
+      background: rgba(11,13,16,.42);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .newsRail__scroller{
+      width: 100%;
+      display:flex;
+      gap: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding: 10px 14px 12px;
+      scrollbar-width: none;
+      max-width: 100%;
+    }
+    .newsRail__scroller::-webkit-scrollbar{ display:none; }
+
+    .newsRail__scroller.is-auto{
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+      cursor: grab;
+    }
+    .newsRail__scroller.is-auto.is-paused{
+      cursor: default;
+    }
+
+    .newsItem{
+      display: block;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      transition: background .15s ease, transform .15s ease;
+      flex: 0 0 auto;
+      width: min(520px, 60vw);
+      scroll-snap-align: start;
+      max-width: 92vw;
+    }
+    .newsItem:hover{
+      background: rgba(255,255,255,.05);
+      transform: translateY(-1px);
+    }
+
+    .newsItem__meta{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      min-width: 0;
+    }
+
+    .newsCat{
+      font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: rgba(231,233,238,.62);
+    }
+
+    .newsTime{
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(11,13,16,.92);
+      background: rgba(122,162,255,.95);
+      padding: 3px 7px;
+      border-radius: 7px;
+      line-height: 1;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .newsItem__title{
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 650;
+      color: rgba(231,233,238,.92);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* =========================
+       4) MAIN LAYOUT
+    ========================== */
+    .layout{
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 18px 14px 28px 0;
+      display: grid;
+      grid-template-columns: var(--side) minmax(0, var(--content)) var(--side);
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    .feed{
+      justify-self: center;
+      width: 100%;
+      display:flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    @media (max-width: 1040px){
+      .layout{
+        grid-template-columns: 1fr minmax(0, var(--content)) 1fr;
+        padding-left: 14px;
+      }
+      .sidebar{ display:none; }
+    }
+
+    /* =========================
+       5) PANELS
+    ========================== */
+    .panel{
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: none;
+    }
+
+    .panel__title{
+      margin: 0 0 10px 0;
+      font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: rgba(231,233,238,.52);
+    }
+
+    .divider{
+      height: 1px;
+      background: rgba(255,255,255,.05);
+      margin: 12px 0;
+    }
+
+    .sidebar--left .panel{
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: none;
+    }
+
+    .panel--edge{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+
+    .sidebar--left,
+    .sidebar--right{
+      position: sticky;
+      top: 62px;
+      align-self: start;
+    }
+
+    .sidebar--right{
+      justify-self: end;
+      margin-right: 4px;
+    }
+
+    /* =========================
+       6) POST
+    ========================== */
+    .post{
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 16px 18px;
+      box-shadow: none;
+    }
+
+    .post__meta{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: rgba(231,233,238,.80);
+      min-width: 0;
+    }
+
+    .profile{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 4px 6px;
+      border-radius: 999px;
+      transition: background .15s ease;
+      min-width: 0;
+    }
+    .profile:hover{ background: rgba(255,255,255,.05); }
+
+    .avatar{
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: block;
+      object-fit: cover;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+
+    .handle{ font-weight: 650; letter-spacing: .2px; }
+    .metaSep{ color: rgba(231,233,238,.45); }
+
+    .post__title{
+      margin: 0 0 12px 0;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: .2px;
+      color: rgba(231,233,238,.96);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .player{
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.05);
+      background: rgba(255,255,255,.02);
+      margin-bottom: 14px;
+      max-width: 100%;
+    }
+    .player iframe{
+      width: 100%;
+      height: 360px;
+      border: 0;
+      display:block;
+    }
+    @media (max-width: 560px){
+      .player iframe{ height: 220px; }
+    }
+
+    .player__fallback{
+      display:block;
+      padding: 18px;
+      color: var(--link);
+    }
+
+    .player__img{
+      width: 100%;
+      height: 360px;
+      display: block;
+      object-fit: cover;
+    }
+    @media (max-width: 560px){
+      .player__img{ height: 220px; }
+    }
+
+    .post__content{
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(231,233,238,.90);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .post__content h2{
+      margin: 16px 0 8px 0;
+      font-size: 16px;
+      color: rgba(231,233,238,.95);
+    }
+    .post__content a.link{
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .post__content ul{
+      margin: 10px 0 10px 18px;
+      padding: 0;
+    }
+    .post__content blockquote{
+      margin: 14px 0;
+      padding: 10px 12px;
+      border-left: 2px solid rgba(122,162,255,.55);
+      background: rgba(122,162,255,.08);
+      border-radius: var(--radius-sm);
+      color: rgba(231,233,238,.95);
+    }
+
+    /* =========================
+       7) LEFT SIDEBAR: SHOTS
+    ========================== */
+    .shotsRail{ margin-top: 10px; }
+
+    .shotsRail__scroller{
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+      max-width: 100%;
+    }
+    .shotsRail__scroller::-webkit-scrollbar{ display:none; }
+
+    .shotCard{
+      flex: 0 0 auto;
+      width: 150px;
+      max-width: 85vw;
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      overflow: hidden;
+      scroll-snap-align: start;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor: pointer;
+    }
+    .shotCard:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    .shotMedia{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background: rgba(255,255,255,.02);
+    }
+
+    .shotMedia__img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    .shotMedia__overlay{
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%);
+    }
+
+    .shotPlay{
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.42);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+      display: grid;
+      place-items: center;
+    }
+    .shotPlay::after{
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 12px solid rgba(255,255,255,.92);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      transform: translateX(1px);
+    }
+
+    .shotBadge{
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(11,13,16,.65);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(231,233,238,.90);
+      text-transform: uppercase;
+    }
+
+    .shotTitle{
+      padding: 10px 10px 11px;
+      font-size: 12.5px;
+      line-height: 1.25;
+      font-weight: 650;
+      color: rgba(231,233,238,.92);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* =========================
+       8) RIGHT SIDEBAR: BIO
+    ========================== */
+    .bio{ display: flex; flex-direction: column; gap: 10px; }
+    .bio__top{ display: flex; align-items: center; gap: 10px; }
+    .bio__id{ min-width: 0; }
+    .bio__name{ font-weight: 700; letter-spacing: .2px; line-height: 1.1; }
+    .bio__handle{ margin-top: 2px; }
+
+    .bio__text{
+      margin: 0;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .bio__links{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+
+    .bio__link{
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: .95;
+    }
+    .bio__link:hover{ opacity: 1; }
+
+    /* =========================
+       9) RIGHT SIDEBAR: VIDEO IN EVIDENZA (desktop)
+    ========================== */
+    .rightFeature{ margin-top: 6px; max-width: 100%; min-width: 0; }
+
+    .rightFeature__tabs{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255,255,255,.02);
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .rightTab{
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: rgba(231,233,238,.86);
+      padding: 12px 10px;
+      font-size: 14px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+      border-right: 1px solid rgba(255,255,255,.06);
+      min-width: 0;
+    }
+    .rightTab:last-child{ border-right: 0; }
+    .rightTab:hover{ background: rgba(255,255,255,.04); }
+    .rightTab.is-active{
+      background: rgba(255,255,255,.06);
+      color: rgba(122,162,255,.95);
+    }
+
+    .rightFeature__list{
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .rfItem{
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 2px;
+      border-radius: 12px;
+      transition: background .15s ease;
+      cursor: pointer;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+    .rfItem:hover{ background: rgba(255,255,255,.03); }
+
+    .rfThumb{
+      position: relative;
+      width: 120px;
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .rfThumb img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    .rfThumb::after{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0) 60%);
+    }
+
+    .rfPlay{
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.42);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+      display: grid;
+      place-items: center;
+      z-index: 2;
+    }
+    .rfPlay::after{
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 11px solid rgba(255,255,255,.92);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      transform: translateX(1px);
+    }
+
+    .rfText{ min-width: 0; }
+
+    .rfTitle{
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 750;
+      color: rgba(231,233,238,.95);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .rfMeta{
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: rgba(231,233,238,.62);
+    }
+
+    /* =========================
+       10) LEFT SIDEBAR: ADS SPACE
+    ========================== */
+    .adSlot{
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.14);
+      background: rgba(255,255,255,.02);
+      padding: 14px;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .adSlot__label{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      min-width: 0;
+    }
+
+    .adTag{
+      font-size: 11px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: rgba(231,233,238,.62);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      white-space: nowrap;
+    }
+
+    .adSlot__body{
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+      min-height: 240px;
+      display: grid;
+      place-items: center;
+      color: rgba(231,233,238,.55);
+      font-size: 13px;
+      text-align: center;
+      padding: 12px;
+      max-width: 100%;
+    }
+
+    #adSlotSidebar iframe,
+    #adSlotSidebar img,
+    #adSlotSidebar video{
+      max-width: 100% !important;
+      width: 100% !important;
+      height: auto !important;
+      display: block;
+    }
+
+    .adSlot__hint{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(231,233,238,.55);
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* =========================
+       11) FOOTER
+    ========================== */
+    .footer{
+      width: 100%;
+      margin-top: 28px;
+      border-top: 1px solid var(--hairline);
+      background: rgba(11,13,16,.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .footer__inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 14px 28px;
+      text-align: center;
+    }
+
+    /* =========================
+       12) MODAL embed (shots + right featured reuse)
+    ========================== */
+    .shotsModal{
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: none;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 18px;
+    }
+    .shotsModal.is-open{ display: grid; place-items: center; }
+
+    .shotsModal__panel{
+      width: min(920px, 96vw);
+      height: min(720px, 86vh);
+      background: rgba(11,13,16,.95);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .shotsModal__bar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .shotsModal__title{
+      font-size: 13px;
+      color: rgba(231,233,238,.85);
+      font-weight: 650;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .shotsModal__close{
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      cursor: pointer;
+      color: rgba(231,233,238,.92);
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .shotsModal__frame{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: rgba(0,0,0,.15);
+    }
+
+    /* =========================
+       13) MOBILE OVERRIDES (X-like)
+    ========================== */
+    @media (max-width: 820px){
+      :root{
+        --gap: 12px;
+        --radius: 12px;
+      }
+
+      .topbar__grid{
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 12px;
+      }
+
+      .topbarLeft{
+        padding-left: 0;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      /* Logo: resta, ma più compatto */
+      .brand{ padding: 4px 6px; }
+      .brand__logo{ height: 22px; }
+
+      /* MOBILE: nascondi campanella */
+      #notifyBtn{ display:none !important; }
+
+      /* MOBILE: mostra CTA al posto della campanella */
+      .ctaBtn{
+        display: inline-flex !important;
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .nav{
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 10px;
+        padding-bottom: 6px;
+        scrollbar-width: none;
+      }
+      .nav::-webkit-scrollbar{ display:none; }
+
+      .nav__link{
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 8px 12px;
+      }
+
+      .topbarRight{
+        justify-self: stretch;
+        width: 100%;
+        gap: 8px;
+      }
+
+      .topbarSearch{ flex: 1 1 auto; }
+      .topbarSearch__input{
+        width: 100%;
+        max-width: 100%;
+        font-size: 14px;
+        padding: 10px 12px;
+      }
+      .topbarSearch__input:focus{ width: 100%; }
+
+      .social__link{ width: 36px; height: 36px; }
+
+      .newsRail__scroller{ padding: 10px 12px 12px; }
+      .newsItem{ width: min(88vw, 360px); padding: 12px; }
+
+      .layout{
+        grid-template-columns: 1fr;
+        padding: 12px 12px 20px;
+        gap: 12px;
+      }
+
+      .feed{
+        justify-self: stretch;
+        width: 100%;
+      }
+
+      .post{
+        padding: 14px 14px 16px;
+        border-radius: 14px;
+      }
+
+      .post__title{
+        font-size: 18px;
+        line-height: 1.25;
+        margin-bottom: 10px;
+      }
+
+      .post__meta{
+        font-size: 13px;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .avatar{ width: 26px; height: 26px; }
+
+      /* Sidebars diventano blocchi normali quando vengono spostate nel feed */
+      .sidebar{
+        display: block;
+        position: static;
+        top: auto;
+        margin: 0;
+      }
+
+      .sidebar--left .panel,
+      .panel--edge{
+        border-radius: 14px;
+        border-left: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+      }
+
+      .sidebar--right{ justify-self: stretch; margin-right: 0; }
+      .panel{ padding: 14px; }
+
+      .shotCard{ width: 140px; }
+
+      .rfItem{ grid-template-columns: 132px 1fr; }
+      .rfThumb{ width: 132px; }
+      .rfTitle{ font-size: 15px; }
+
+      .sidebar.in-feed{ width: 100%; max-width: 100%; }
+    }
+
+    @media (max-width: 420px){
+      .post__content{ font-size: 14px; line-height: 1.6; }
+      .newsItem{ width: min(92vw, 340px); padding: 10px; }
+      .newsItem__title{ font-size: 13px; }
+      .shotCard{ width: 132px; }
+    }
+
+    /* =========================
+       14) COOKIE BANNER (X-like)
+    ========================== */
+    .cookieBanner{
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 1000;
+
+      max-width: var(--max);
+      margin: 0 auto;
+
+      background: rgba(11,13,16,.72);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .cookieBanner__inner{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding: 14px;
+      align-items: center;
+    }
+
+    .cookieBanner__title{
+      margin: 0 0 6px 0;
+      font-size: 14px;
+      font-weight: 750;
+      color: rgba(231,233,238,.96);
+      letter-spacing: .2px;
+    }
+
+    .cookieBanner__text{
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgba(231,233,238,.72);
+    }
+
+    .cookieBanner__links{
+      margin-top: 8px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cookieLink{
+      font-size: 13px;
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: .95;
+    }
+
+    .cookieActions{
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .cookieBtn{
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(231,233,238,.92);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+
+    .cookieBtn:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.14);
+      transform: translateY(-1px);
+    }
+
+    .cookieBtn--primary{
+      border-color: rgba(122,162,255,.45);
+      background: rgba(122,162,255,.16);
+    }
+
+    .cookieBtn--primary:hover{
+      background: rgba(122,162,255,.24);
+      border-color: rgba(122,162,255,.60);
+    }
+
+    .cookieBanner[hidden]{ display: none !important; }
+
+    .cookieModal{
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      display: none;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 18px;
+    }
+
+    .cookieModal.is-open{ display: grid; place-items: center; }
+
+    .cookieModal__panel{
+      width: min(720px, 96vw);
+      background: rgba(11,13,16,.95);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .cookieModal__bar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .cookieModal__title{
+      font-size: 13px;
+      color: rgba(231,233,238,.85);
+      font-weight: 750;
+    }
+
+    .cookieModal__close{
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      cursor: pointer;
+      color: rgba(231,233,238,.92);
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .cookieModal__body{
+      padding: 14px;
+      color: rgba(231,233,238,.88);
+    }
+
+    .cookiePrefs{ display: grid; gap: 12px; }
+
+    .cookiePrefRow{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+    }
+
+    .cookiePrefRow__name{
+      font-size: 14px;
+      font-weight: 750;
+      margin: 0 0 4px 0;
+    }
+
+    .cookiePrefRow__desc{
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgba(231,233,238,.66);
+    }
+
+    .cookieToggle{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+    }
+
+    .switch{
+      width: 44px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      position: relative;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .switch::after{
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: rgba(231,233,238,.92);
+      transform: translateY(-50%);
+      transition: transform .15s ease;
+    }
+    .switch.is-on{
+      background: rgba(122,162,255,.20);
+      border-color: rgba(122,162,255,.40);
+    }
+    .switch.is-on::after{
+      transform: translate(18px, -50%);
+    }
+    .switch.is-disabled{
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .cookieModal__footer{
+      padding: 12px 14px 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px){
+      .cookieBanner__inner{ grid-template-columns: 1fr; }
+      .cookieActions{ justify-content: flex-start; }
+    }
+
+    /* =========================
+       15) MOBILE: VIDEO SHEET (quick access)
+    ========================== */
+    .mVideoFab, .mVideoSheet{ display:none; }
+
+    @media (max-width: 820px){
+      .mVideoFab{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        right: 14px;
+        bottom: 14px;
+        z-index: 1100;
+        height: 44px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(11,13,16,.72);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color: rgba(231,233,238,.92);
+        font-weight: 800;
+        letter-spacing: .2px;
+        cursor: pointer;
+      }
+
+      .mVideoSheet{
+        display: block;
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        z-index: 1101;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(11,13,16,.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 18px 60px rgba(0,0,0,.55);
+        overflow: hidden;
+
+        transform: translateY(110%);
+        transition: transform .18s ease;
+      }
+
+      .mVideoSheet.is-open{ transform: translateY(0); }
+
+      .mVideoSheet__bar{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 12px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+
+      .mVideoSheet__title{
+        font-size: 13px;
+        font-weight: 850;
+        color: rgba(231,233,238,.92);
+      }
+
+      .mVideoSheet__close{
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(255,255,255,.04);
+        color: rgba(231,233,238,.92);
+        cursor:pointer;
+      }
+
+      .mVideoSheet__content{
+        padding: 12px;
+        max-height: min(66vh, 520px);
+        overflow: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOPBAR (sticky) -->
+  <header class="topbar">
+    <div class="topbar__grid">
+
+      <!-- SINISTRA: LOGO + PULSANTI -->
+      <div class="topbarLeft" aria-label="Brand e azioni">
+        <a class="brand" href="/" aria-label="Homepage">
+          <img class="brand__logo" src="img/logo.png" alt="Dark Feed">
+        </a>
+
+        <div class="topbarActions" aria-label="Azioni">
+          <a class="ctaBtn" href="#abbonati" aria-label="Abbonati e sostienici">
+            Abbonati e sostienici
+          </a>
+
+          <button class="iconBtn" type="button" id="notifyBtn" aria-label="Notifiche" title="Notifiche">
+            <svg class="iconBtn__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+            <span class="badgeDot" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CENTRO: NAV -->
+      <nav class="nav" aria-label="Categorie">
+        <a class="nav__link nav__link--active" href="#" data-feed="tutti">News</a>
+        <a class="nav__link" href="#" data-feed="politica">Politica</a>
+        <a class="nav__link" href="#" data-feed="mondo">Mondo</a>
+        <a class="nav__link" href="#" data-feed="tecnologia">Tecnologia</a>
+        <a class="nav__link" href="#" data-feed="finanza">Finanza</a>
+      </nav>
+
+      <!-- DESTRA: RICERCA + SOCIAL -->
+      <div class="topbarRight" aria-label="Ricerca e social">
+        <div class="topbarSearch">
+          <input id="search" class="topbarSearch__input" type="search" placeholder="Cerca nel feed" aria-label="Cerca nel feed" />
+        </div>
+
+        <div class="social" aria-label="Social links">
+          <a class="social__link" href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+            <svg class="social__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.9 2H22l-6.8 7.8L23.3 22h-6.5l-5.1-6.6L6 22H2.9l7.3-8.4L1 2h6.7l4.6 6 6.6-6zM17 19.2h1.7L6.9 4.7H5.1L17 19.2z"/>
+            </svg>
+          </a>
+
+          <a class="social__link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg class="social__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-.9a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/>
+            </svg>
+          </a>
+
+          <a class="social__link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg class="social__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5A3 3 0 0 0 2.4 7.2 31 31 0 0 0 2 12a31 31 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22 12a31 31 0 0 0-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/>
+            </svg>
+          </a>
+
+          <a class="social__link" href="https://open.spotify.com/" target="_blank" rel="noopener" aria-label="Spotify">
+            <svg class="social__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.6a.9.9 0 0 1-1.2.3c-3-1.8-6.8-2.2-11.3-1.2a.9.9 0 0 1-.4-1.8c4.9-1.1 9.1-.7 12.5 1.3.4.2.5.8.4 1.4zm1.1-2.8a1.1 1.1 0 0 1-1.5.4c-3.4-2-8.6-2.6-12.6-1.4a1.1 1.1 0 1 1-.6-2.1c4.6-1.4 10.4-.7 14.3 1.7.5.3.7 1 .4 1.4zm.1-3.1c-4-2.4-10.7-2.7-14.5-1.6a1.3 1.3 0 1 1-.7-2.5c4.4-1.3 11.8-1 16.4 1.8a1.3 1.3 0 0 1-1.2 2.3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- NEWS RAIL (non sticky) -->
+  <div class="newsRailWrap" aria-label="Notizie in scorrimento">
+    <div class="newsRail__scroller" id="newsRailScroller">
+      <a class="newsItem" href="#" aria-label="Apri notizia">
+        <div class="newsItem__meta">
+          <span class="newsCat">Sport</span>
+          <span class="newsTime">23:39</span>
+        </div>
+        <div class="newsItem__title">
+          De Rossi replica allo studio di DAZN sul rigore dato al Genoa: “Non sono d’accordo, per me c’era”
+        </div>
+      </a>
+
+      <a class="newsItem" href="#" aria-label="Apri notizia">
+        <div class="newsItem__meta">
+          <span class="newsCat">Sport</span>
+          <span class="newsTime">23:22</span>
+        </div>
+        <div class="newsItem__title">
+          Allegri bacchetta il Milan dopo il pareggio con il Genoa: “Alla fine siamo stati anche fortunati”
+        </div>
+      </a>
+
+      <a class="newsItem" href="#" aria-label="Apri notizia">
+        <div class="newsItem__meta">
+          <span class="newsCat">Spettacolo</span>
+          <span class="newsTime">23:05</span>
+        </div>
+        <div class="newsItem__title">
+          Eredità Brigitte Bardot, battaglia per il patrimonio di quasi 70 milioni: il figlio e il marito contro il testamento
+        </div>
+      </a>
+
+      <a class="newsItem" href="#" aria-label="Apri notizia">
+        <div class="newsItem__meta">
+          <span class="newsCat">Sport</span>
+          <span class="newsTime">22:53</span>
+        </div>
+        <div class="newsItem__title">
+          Leao tiene a galla il Milan, Colombo illude il Genoa: partita pazza a San Siro, Allegri scivola a -3 dall’Inter
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="layout" id="posts">
+
+    <!-- SIDEBAR SINISTRA (spostata nel feed su mobile via JS) -->
+    <aside class="sidebar sidebar--left" id="leftSidebar" aria-label="Shots e pubblicità">
+      <div class="panel">
+
+        <h2 class="panel__title">Video shots</h2>
+        <p class="muted small">Clip rapide da X e Telegram (con anteprima). Tocca per aprire.</p>
+
+        <div class="shotsRail" aria-label="Video shots">
+          <div class="shotsRail__scroller" id="shotsScroller"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="panel__title">Pubblicità</h2>
+
+        <section class="adSlot" aria-label="Spazio pubblicitario">
+          <div class="adSlot__label">
+            <span class="adTag">AD</span>
+            <span class="muted small">300×250 · sidebar</span>
+          </div>
+
+          <div class="adSlot__body" id="adSlotSidebar">
+            Inserisci qui il codice pubblicitario (iframe/script) oppure un banner.
+          </div>
+
+          <p class="adSlot__hint">
+            Suggerimento: puoi sostituire il contenuto di questo blocco con un tag <code>&lt;iframe&gt;</code>
+            o con lo snippet della tua concessionaria (Google AdSense ecc.).
+          </p>
+        </section>
+
+        <div class="divider"></div>
+      </div>
+    </aside>
+
+    <!-- FEED CENTRALE -->
+    <section class="feed" aria-label="Articoli">
+
+      <article class="post"
+               data-category="tecnologia"
+               data-image-src="images/esempio.jpg"
+               data-image-alt="Esempio immagine">
+        <div class="post__meta">
+          <a class="profile" href="https://example.com/profilox" target="_blank" rel="noopener">
+            <img class="avatar" src="img/avatar.png" alt="Avatar profilo @profilox">
+            <span class="handle">@darkfeed</span>
+          </a>
+          <span class="metaSep" aria-hidden="true">·</span>
+          <time class="time muted" datetime="2026-01-09">9 gen 2026</time>
+        </div>
+
+        <h1 class="post__title">Titolo dell’articolo (con immagine)</h1>
+
+        <div class="player" data-player>
+          <a class="player__fallback" href="#" aria-label="Apri contenuto">Apri contenuto</a>
+        </div>
+
+        <div class="post__content">
+          <p>Qui scrivi l’articolo (contenuto demo).</p>
+          <h2>Sottotitolo</h2>
+          <p>Un altro paragrafo. Puoi inserire <a href="#" class="link">link</a>, elenchi e citazioni.</p>
+          <ul>
+            <li>Punto uno</li>
+            <li>Punto due</li>
+            <li>Punto tre</li>
+          </ul>
+          <blockquote>Una citazione o un passaggio evidenziato.</blockquote>
+          <p class="muted small">Fine articolo.</p>
+        </div>
+      </article>
+
+      <article class="post"
+               data-category="finanza"
+               data-youtube-id="dQw4w9WgXcQ">
+        <div class="post__meta">
+          <a class="profile" href="https://example.com/profilox" target="_blank" rel="noopener">
+            <img class="avatar" src="images/avatar-profilox.jpg" alt="Avatar profilo @profilox">
+            <span class="handle">@profilox</span>
+          </a>
+          <span class="metaSep" aria-hidden="true">·</span>
+          <time class="time muted" datetime="2026-01-08">8 gen 2026</time>
+        </div>
+
+        <h1 class="post__title">Secondo articolo (con video)</h1>
+
+        <div class="player" data-player>
+          <a class="player__fallback" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">
+            Apri il video su YouTube
+          </a>
+        </div>
+
+        <div class="post__content">
+          <p>Secondo contenuto (demo).</p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- SIDEBAR DESTRA (desktop/tablet) -->
+    <aside class="sidebar sidebar--right" aria-label="Bio e video">
+      <div class="panel panel--edge">
+        <div class="bio">
+          <div class="bio__top">
+            <img class="avatar" src="img/avatar.png" alt="Avatar profilo">
+            <div class="bio__id">
+              <div class="bio__name">media news real</div>
+              <div class="bio__handle muted small">@darkfeed</div>
+            </div>
+          </div>
+
+          <p class="bio__text muted">
+            Dark Feed è un media di informazione indipendente. Raccontiamo i fatti per quello che sono, con contesto, verifica e analisi, senza rumore né filtri.
+          </p>
+
+          <div class="bio__links">
+            <a class="bio__link" href="#about">Collaborazioni</a>
+            <span class="muted">·</span>
+            <a class="bio__link" href="#posts">Scrivi con noi</a>
+            <span class="muted">·</span>
+            <a class="bio__link" href="mailto:hello@example.com">Contatti</a>
+          </div>
+
+          <div class="divider"></div>
+
+          <section class="rightFeature" aria-label="Video in evidenza (desktop)">
+            <div class="rightFeature__tabs" role="tablist" aria-label="Filtri video">
+              <button class="rightTab is-active" type="button" role="tab" aria-selected="true" data-rf-tab="recenti">Recente</button>
+              <button class="rightTab" type="button" role="tab" aria-selected="false" data-rf-tab="popolari">Popolare</button>
+              <button class="rightTab" type="button" role="tab" aria-selected="false" data-rf-tab="commenti">Commenti</button>
+            </div>
+
+            <div class="rightFeature__list" id="rightFeaturedList" aria-live="polite"></div>
+          </section>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="about">
+    <div class="footer__inner">
+      <p class="muted small">
+        © <span id="year"></span> darkfeed.it - tutti i diritti riservati.
+      </p>
+    </div>
+  </footer>
+
+  <!-- MODAL (shots + featured) -->
+  <div class="shotsModal" id="shotsModal" aria-hidden="true" role="dialog" aria-label="Player contenuti">
+    <div class="shotsModal__panel">
+      <div class="shotsModal__bar">
+        <div class="shotsModal__title" id="shotsModalTitle">Contenuto</div>
+        <button class="shotsModal__close" type="button" id="shotsModalClose" aria-label="Chiudi">✕</button>
+      </div>
+      <iframe class="shotsModal__frame"
+              id="shotsModalFrame"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- COOKIE BANNER -->
+  <section class="cookieBanner" id="cookieBanner" hidden aria-label="Cookie banner">
+    <div class="cookieBanner__inner">
+      <div>
+        <h2 class="cookieBanner__title">Preferenze cookie</h2>
+        <p class="cookieBanner__text">
+          Usiamo cookie tecnici per il corretto funzionamento del sito. Con il tuo consenso possiamo usare cookie di analisi e marketing per migliorare contenuti e misurare le performance.
+        </p>
+
+        <div class="cookieBanner__links">
+          <a class="cookieLink" href="/cookie-policy.html" target="_blank" rel="noopener">Cookie Policy</a>
+          <a class="cookieLink" href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
+        </div>
+      </div>
+
+      <div class="cookieActions" aria-label="Azioni cookie">
+        <button class="cookieBtn" type="button" id="cookieReject">Rifiuta</button>
+        <button class="cookieBtn" type="button" id="cookieCustomize">Personalizza</button>
+        <button class="cookieBtn cookieBtn--primary" type="button" id="cookieAcceptAll">Accetta tutti</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COOKIE PREFERENCES MODAL -->
+  <div class="cookieModal" id="cookieModal" aria-hidden="true" role="dialog" aria-label="Preferenze cookie">
+    <div class="cookieModal__panel">
+      <div class="cookieModal__bar">
+        <div class="cookieModal__title">Gestisci preferenze</div>
+        <button class="cookieModal__close" type="button" id="cookieModalClose" aria-label="Chiudi">✕</button>
+      </div>
+
+      <div class="cookieModal__body">
+        <div class="cookiePrefs" role="list">
+          <div class="cookiePrefRow" role="listitem">
+            <div>
+              <p class="cookiePrefRow__name">Necessari</p>
+              <p class="cookiePrefRow__desc">Sempre attivi. Servono per funzionalità di base e sicurezza.</p>
+            </div>
+            <div class="cookieToggle">
+              <div class="switch is-on is-disabled" aria-label="Necessari sempre attivi" aria-disabled="true"></div>
+            </div>
+          </div>
+
+          <div class="cookiePrefRow" role="listitem">
+            <div>
+              <p class="cookiePrefRow__name">Analitici</p>
+              <p class="cookiePrefRow__desc">Ci aiutano a capire come viene usato il sito (statistiche aggregate).</p>
+            </div>
+            <div class="cookieToggle">
+              <div class="switch" id="toggleAnalytics" role="switch" aria-checked="false" tabindex="0" aria-label="Abilita cookie analitici"></div>
+            </div>
+          </div>
+
+          <div class="cookiePrefRow" role="listitem">
+            <div>
+              <p class="cookiePrefRow__name">Marketing</p>
+              <p class="cookiePrefRow__desc">Utili per mostrarti contenuti o annunci più pertinenti.</p>
+            </div>
+            <div class="cookieToggle">
+              <div class="switch" id="toggleMarketing" role="switch" aria-checked="false" tabindex="0" aria-label="Abilita cookie marketing"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cookieModal__footer">
+        <button class="cookieBtn" type="button" id="cookieSavePrefs">Salva preferenze</button>
+        <button class="cookieBtn cookieBtn--primary" type="button" id="cookieAcceptAllFromModal">Accetta tutti</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE: QUICK ACCESS VIDEO SHEET -->
+  <button class="mVideoFab" id="mVideoFab" type="button" aria-controls="mVideoSheet" aria-expanded="false">
+    Video
+  </button>
+
+  <section class="mVideoSheet" id="mVideoSheet" aria-hidden="true" aria-label="Video in evidenza">
+    <div class="mVideoSheet__bar">
+      <div class="mVideoSheet__title">Video in evidenza</div>
+      <button class="mVideoSheet__close" id="mVideoSheetClose" type="button" aria-label="Chiudi">✕</button>
+    </div>
+
+    <div class="mVideoSheet__content">
+      <div class="rightFeature__tabs" role="tablist" aria-label="Filtri video (mobile)">
+        <button class="rightTab is-active" type="button" role="tab" aria-selected="true" data-mrf-tab="recenti">Recente</button>
+        <button class="rightTab" type="button" role="tab" aria-selected="false" data-mrf-tab="popolari">Popolare</button>
+        <button class="rightTab" type="button" role="tab" aria-selected="false" data-mrf-tab="commenti">Commenti</button>
+      </div>
+
+      <div class="rightFeature__list" id="mRightFeaturedList" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      // ===== Footer year =====
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      // ===== Notifiche (demo) =====
+      const notifyBtn = document.getElementById("notifyBtn");
+      if (notifyBtn) {
+        notifyBtn.addEventListener("click", () => {
+          const dot = notifyBtn.querySelector(".badgeDot");
+          if (dot) dot.classList.toggle("hidden");
+        });
+      }
+
+      // ===== Modal (shots + right featured reuse) =====
+      const shotsModal = document.getElementById("shotsModal");
+      const shotsModalClose = document.getElementById("shotsModalClose");
+      const shotsModalFrame = document.getElementById("shotsModalFrame");
+      const shotsModalTitle = document.getElementById("shotsModalTitle");
+
+      function openModal(title, src) {
+        if (!shotsModal || !shotsModalFrame || !shotsModalTitle) return;
+        if (!src) return;
+
+        shotsModalTitle.textContent = title || "Contenuto";
+        shotsModalFrame.src = src;
+
+        shotsModal.classList.add("is-open");
+        shotsModal.setAttribute("aria-hidden", "false");
+
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        if (!shotsModal || !shotsModalFrame) return;
+
+        shotsModal.classList.remove("is-open");
+        shotsModal.setAttribute("aria-hidden", "true");
+        shotsModalFrame.src = "about:blank";
+
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+      }
+
+      shotsModalClose?.addEventListener("click", closeModal);
+      shotsModal?.addEventListener("click", (e) => {
+        if (e.target === shotsModal) closeModal();
+      });
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+
+      // ===== Media embed (immagine o YouTube) =====
+      document.querySelectorAll("article.post").forEach((post) => {
+        const playerHost = post.querySelector("[data-player]");
+        if (!playerHost) return;
+
+        const imageSrc = post.getAttribute("data-image-src");
+        const imageAlt = post.getAttribute("data-image-alt") || "";
+        const videoId  = post.getAttribute("data-youtube-id");
+
+        if (imageSrc) {
+          const img = document.createElement("img");
+          img.className = "player__img";
+          img.loading = "lazy";
+          img.src = imageSrc;
+          img.alt = imageAlt;
+
+          playerHost.innerHTML = "";
+          playerHost.appendChild(img);
+          return;
+        }
+
+        if (videoId) {
+          const iframe = document.createElement("iframe");
+          iframe.loading = "lazy";
+          iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.allowFullscreen = true;
+          iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?rel=0`;
+
+          playerHost.innerHTML = "";
+          playerHost.appendChild(iframe);
+          return;
+        }
+      });
+
+      // ===== Feed filter + search =====
+      const posts = Array.from(document.querySelectorAll("article.post"));
+      const search = document.getElementById("search");
+      let activeFeed = "tutti";
+
+      function setActiveNav(feed) {
+        document.querySelectorAll(".nav [data-feed]").forEach(a => a.classList.remove("nav__link--active"));
+        const topLink = document.querySelector(`.nav [data-feed="${CSS.escape(feed)}"]`);
+        if (topLink) topLink.classList.add("nav__link--active");
+      }
+
+      // =========================
+      // MOBILE: sposta shots+ads sotto il primo articolo visibile del feed
+      // =========================
+      const leftSidebar = document.getElementById("leftSidebar");
+      const feedEl = document.querySelector("section.feed");
+
+      let leftSidebarOriginalParent = null;
+      let leftSidebarOriginalNext = null;
+
+      function rememberLeftSidebarPosition() {
+        if (!leftSidebar || leftSidebarOriginalParent) return;
+        leftSidebarOriginalParent = leftSidebar.parentNode;
+        leftSidebarOriginalNext = leftSidebar.nextSibling;
+      }
+
+      function getFirstVisiblePost() {
+        if (!feedEl) return null;
+        const all = Array.from(feedEl.querySelectorAll("article.post"));
+        return all.find(p => !p.classList.contains("hidden")) || all[0] || null;
+      }
+
+      function moveLeftSidebarUnderFirstPost(isMobile) {
+        if (!leftSidebar || !feedEl) return;
+
+        rememberLeftSidebarPosition();
+
+        if (isMobile) {
+          const firstPost = getFirstVisiblePost();
+          if (!firstPost) {
+            if (leftSidebar.parentNode !== feedEl) feedEl.prepend(leftSidebar);
+            leftSidebar.classList.add("in-feed");
+            return;
+          }
+
+          if (leftSidebar.parentNode !== feedEl) {
+            feedEl.insertBefore(leftSidebar, firstPost.nextSibling);
+          } else {
+            if (leftSidebar.previousElementSibling !== firstPost) {
+              feedEl.insertBefore(leftSidebar, firstPost.nextSibling);
+            }
+          }
+
+          leftSidebar.classList.add("in-feed");
+        } else {
+          leftSidebar.classList.remove("in-feed");
+          if (leftSidebarOriginalParent) {
+            if (leftSidebarOriginalNext && leftSidebarOriginalParent.contains(leftSidebarOriginalNext)) {
+              leftSidebarOriginalParent.insertBefore(leftSidebar, leftSidebarOriginalNext);
+            } else {
+              leftSidebarOriginalParent.appendChild(leftSidebar);
+            }
+          }
+        }
+      }
+
+      const mqMobile = window.matchMedia("(max-width: 820px)");
+      function syncLeftSidebarPlacement() {
+        moveLeftSidebarUnderFirstPost(mqMobile.matches);
+      }
+      if (mqMobile.addEventListener) mqMobile.addEventListener("change", syncLeftSidebarPlacement);
+      else mqMobile.addListener(syncLeftSidebarPlacement);
+
+      function applyFilters() {
+        const q = (search?.value || "").trim().toLowerCase();
+
+        posts.forEach((post) => {
+          const title = post.querySelector(".post__title")?.textContent?.toLowerCase() || "";
+          const cat = (post.getAttribute("data-category") || "").toLowerCase();
+
+          const matchCategory = (activeFeed === "tutti") || (cat === activeFeed);
+          const matchSearch = !q || title.includes(q);
+
+          post.classList.toggle("hidden", !(matchCategory && matchSearch));
+        });
+
+        syncLeftSidebarPlacement();
+      }
+
+      document.querySelectorAll("[data-feed]").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          activeFeed = link.getAttribute("data-feed") || "tutti";
+          setActiveNav(activeFeed);
+          applyFilters();
+        });
+      });
+
+      search?.addEventListener("input", applyFilters);
+
+      // ===== SHOTS =====
+      const shots = [
+        { platform: "x",        title: "Crans-Montana: genitori di Riccardo…", url: "https://x.com/USERNAME/status/0000000000000000000", thumb: "img/shots/shot1.jpg" },
+        { platform: "x",        title: "Crans-Montana, proprietaria del…",     url: "https://x.com/USERNAME/status/0000000000000000001", thumb: "img/shots/shot2.jpg" },
+        { platform: "telegram", title: "Meloni non risponde su Paragone…",      url: "https://t.me/NOME_CANALE/1234",                   thumb: "img/shots/shot3.jpg" },
+        { platform: "telegram", title: "Il video di Andreas, un senzatetto…",  url: "https://t.me/NOME_CANALE/5678",                   thumb: "img/shots/shot4.jpg" }
+      ];
+
+      function getEmbedUrl(item) {
+        const u = String(item.url || "").trim();
+        if (!u) return "";
+
+        if (item.platform === "x") return `https://twitframe.com/show?url=${encodeURIComponent(u)}`;
+        if (item.platform === "telegram") return u.includes("?") ? `${u}&embed=1` : `${u}?embed=1`;
+
+        return u;
+      }
+
+      function buildShots() {
+        const host = document.getElementById("shotsScroller");
+        if (!host) return;
+
+        host.innerHTML = "";
+
+        shots.forEach((shot) => {
+          const card = document.createElement("div");
+          card.className = "shotCard";
+          card.setAttribute("role", "link");
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("aria-label", `Apri shot: ${shot.title || "contenuto"}`);
+
+          const platformLabel = (shot.platform || "").toUpperCase() || "LINK";
+          const safeTitle = shot.title || "Shot";
+
+          card.innerHTML = `
+            <div class="shotMedia">
+              ${shot.thumb ? `<img class="shotMedia__img" src="${shot.thumb}" alt="">` : ""}
+              <div class="shotMedia__overlay"></div>
+              <div class="shotBadge">${platformLabel}</div>
+              <div class="shotPlay" aria-hidden="true"></div>
+            </div>
+            <div class="shotTitle">${safeTitle}</div>
+          `;
+
+          const open = () => {
+            const src = getEmbedUrl(shot);
+            if (!src) return;
+            openModal(shot.title || "Shot", src);
+          };
+
+          card.addEventListener("click", open);
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              open();
+            }
+          });
+
+          host.appendChild(card);
+        });
+      }
+
+      // ===== Right featured data =====
+      const rightFeaturedData = {
+        recenti: [
+          { title: "L’Italia dichiara guerra a USA e Free Speech", time: "1 giorno fa", platform: "youtube", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", thumb: "img/right/recente1.jpg" },
+          { title: "Putin ormai è messo all’angolo (alta tensione)", time: "2 giorni fa", platform: "youtube", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", thumb: "img/right/recente2.jpg" },
+          { title: "L’Iran, in fiamme, ignorato da TV e giornali", time: "3 giorni fa", platform: "youtube", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", thumb: "img/right/recente3.jpg" }
+        ],
+        popolari: [
+          { title: "Il ruggito dell’Europa, pronta a difendersi", time: "4 giorni fa", platform: "youtube", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", thumb: "img/right/pop1.jpg" },
+          { title: "I topi scappano: Trump è morto, viva Trump", time: "5 giorni fa", platform: "youtube", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", thumb: "img/right/pop2.jpg" }
+        ],
+        commenti: [
+          { title: "Reazioni e commenti: cosa non torna", time: "6 ore fa", platform: "youtube", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", thumb: "img/right/com1.jpg" }
+        ]
+      };
+
+      function getYouTubeIdFromUrl(url) {
+        try{
+          const u = new URL(url);
+          if (u.hostname.includes("youtube.com")) return u.searchParams.get("v") || "";
+          if (u.hostname.includes("youtu.be")) return u.pathname.replace("/", "");
+        }catch(_){}
+        return "";
+      }
+
+      function openRightFeatured(item) {
+        if (!item || !item.url) return;
+
+        if (item.platform === "youtube") {
+          const vid = getYouTubeIdFromUrl(item.url);
+          const src = vid
+            ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(vid)}?rel=0&autoplay=1`
+            : item.url;
+          openModal(item.title || "Video", src);
+          return;
+        }
+
+        openModal(item.title || "Video", item.url);
+      }
+
+      function renderFeaturedInto(host, tabKey) {
+        if (!host) return;
+        const items = rightFeaturedData[tabKey] || [];
+        host.innerHTML = "";
+
+        items.forEach((item) => {
+          const row = document.createElement("article");
+          row.className = "rfItem";
+          row.setAttribute("role", "link");
+          row.setAttribute("tabindex", "0");
+          row.setAttribute("aria-label", `Apri video: ${item.title || "contenuto"}`);
+
+          const safeTitle = item.title || "Senza titolo";
+          const safeTime = item.time || "";
+          const thumb = item.thumb || "";
+
+          row.innerHTML = `
+            <div class="rfThumb" aria-hidden="true">
+              ${thumb ? `<img src="${thumb}" alt="">` : ""}
+              <div class="rfPlay" aria-hidden="true"></div>
+            </div>
+
+            <div class="rfText">
+              <div class="rfTitle">${safeTitle}</div>
+              <div class="rfMeta">
+                <span aria-hidden="true">🕒</span>
+                <span>${safeTime}</span>
+              </div>
+            </div>
+          `;
+
+          row.addEventListener("click", () => openRightFeatured(item));
+          row.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openRightFeatured(item);
+            }
+          });
+
+          host.appendChild(row);
+        });
+      }
+
+      // Desktop tabs
+      function initRightFeaturedTabs() {
+        const host = document.getElementById("rightFeaturedList");
+        const tabs = Array.from(document.querySelectorAll(".sidebar--right [data-rf-tab]"));
+        if (!tabs.length || !host) return;
+
+        tabs.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const key = btn.getAttribute("data-rf-tab") || "recenti";
+            tabs.forEach(t => {
+              const isActive = (t.getAttribute("data-rf-tab") === key);
+              t.classList.toggle("is-active", isActive);
+              t.setAttribute("aria-selected", isActive ? "true" : "false");
+            });
+            renderFeaturedInto(host, key);
+          });
+        });
+
+        renderFeaturedInto(host, "recenti");
+      }
+
+      // Mobile sheet
+      const mVideoFab = document.getElementById("mVideoFab");
+      const mVideoSheet = document.getElementById("mVideoSheet");
+      const mVideoSheetClose = document.getElementById("mVideoSheetClose");
+      const mRightList = document.getElementById("mRightFeaturedList");
+
+      function openMVideoSheet(){
+        if (!mVideoSheet || !mVideoFab) return;
+        mVideoSheet.classList.add("is-open");
+        mVideoSheet.setAttribute("aria-hidden", "false");
+        mVideoFab.setAttribute("aria-expanded", "true");
+      }
+
+      function closeMVideoSheet(){
+        if (!mVideoSheet || !mVideoFab) return;
+        mVideoSheet.classList.remove("is-open");
+        mVideoSheet.setAttribute("aria-hidden", "true");
+        mVideoFab.setAttribute("aria-expanded", "false");
+      }
+
+      mVideoFab?.addEventListener("click", () => {
+        const isOpen = mVideoSheet?.classList.contains("is-open");
+        if (isOpen) closeMVideoSheet(); else openMVideoSheet();
+      });
+      mVideoSheetClose?.addEventListener("click", closeMVideoSheet);
+
+      function initMobileFeaturedTabs(){
+        const tabs = Array.from(document.querySelectorAll("#mVideoSheet [data-mrf-tab]"));
+        if (!tabs.length || !mRightList) return;
+
+        tabs.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const key = btn.getAttribute("data-mrf-tab") || "recenti";
+            tabs.forEach(t => {
+              const isActive = (t.getAttribute("data-mrf-tab") === key);
+              t.classList.toggle("is-active", isActive);
+              t.setAttribute("aria-selected", isActive ? "true" : "false");
+            });
+            renderFeaturedInto(mRightList, key);
+          });
+        });
+
+        renderFeaturedInto(mRightList, "recenti");
+      }
+
+      // ===== NEWS RAIL: auto-scroll infinito =====
+      function autoScrollNewsRail() {
+        const scroller = document.getElementById("newsRailScroller");
+        if (!scroller) return;
+
+        const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion) return;
+
+        const originalItems = Array.from(scroller.children).filter(
+          el => el.classList && el.classList.contains("newsItem")
+        );
+        if (originalItems.length < 2) return;
+
+        if (!scroller.dataset.looped) {
+          originalItems.forEach((node) => scroller.appendChild(node.cloneNode(true)));
+          scroller.dataset.looped = "1";
+        }
+
+        scroller.classList.add("is-auto");
+
+        const SPEED = 0.45;
+        let rafId = null;
+        let paused = false;
+        let isUserInteracting = false;
+
+        function getHalfWidth() {
+          return scroller.scrollWidth / 2;
+        }
+
+        function setPaused(v) {
+          paused = v;
+          scroller.classList.toggle("is-paused", v);
+          scroller.style.scrollSnapType = v ? "x mandatory" : "none";
+        }
+
+        function tick() {
+          if (!paused) {
+            scroller.scrollLeft += SPEED;
+            const half = getHalfWidth();
+            if (scroller.scrollLeft >= half) scroller.scrollLeft -= half;
+          }
+          rafId = requestAnimationFrame(tick);
+        }
+
+        scroller.addEventListener("mouseenter", () => setPaused(true));
+        scroller.addEventListener("mouseleave", () => { if (!isUserInteracting) setPaused(false); });
+
+        const onUserStart = () => { isUserInteracting = true; setPaused(true); };
+        const onUserEnd = () => {
+          isUserInteracting = false;
+          setTimeout(() => setPaused(false), 600);
+        };
+
+        scroller.addEventListener("pointerdown", onUserStart, { passive: true });
+        scroller.addEventListener("touchstart", onUserStart, { passive: true });
+        window.addEventListener("pointerup", onUserEnd, { passive: true });
+        window.addEventListener("touchend", onUserEnd, { passive: true });
+        window.addEventListener("touchcancel", onUserEnd, { passive: true });
+
+        scroller.addEventListener("wheel", () => { onUserStart(); onUserEnd(); }, { passive: true });
+
+        setPaused(false);
+        rafId = requestAnimationFrame(tick);
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = null;
+          } else if (!rafId) {
+            rafId = requestAnimationFrame(tick);
+          }
+        });
+      }
+
+      // =========================
+      // COOKIE CONSENT (no library)
+      // =========================
+      const CONSENT_KEY = "df_cookie_consent_v1";
+
+      const cookieBanner = document.getElementById("cookieBanner");
+      const cookieModal  = document.getElementById("cookieModal");
+
+      const btnAcceptAll = document.getElementById("cookieAcceptAll");
+      const btnReject    = document.getElementById("cookieReject");
+      const btnCustomize = document.getElementById("cookieCustomize");
+
+      const btnModalClose = document.getElementById("cookieModalClose");
+      const btnSavePrefs  = document.getElementById("cookieSavePrefs");
+      const btnAcceptAllM = document.getElementById("cookieAcceptAllFromModal");
+
+      const toggleAnalytics = document.getElementById("toggleAnalytics");
+      const toggleMarketing = document.getElementById("toggleMarketing");
+
+      function readConsent() {
+        try {
+          const raw = localStorage.getItem(CONSENT_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (_) {
+          return null;
+        }
+      }
+
+      function writeConsent(consent) {
+        try {
+          localStorage.setItem(CONSENT_KEY, JSON.stringify({
+            necessary: true,
+            analytics: !!consent.analytics,
+            marketing: !!consent.marketing,
+            ts: Date.now()
+          }));
+        } catch (_) {}
+      }
+
+      function showBanner() {
+        if (cookieBanner) cookieBanner.hidden = false;
+      }
+
+      function hideBanner() {
+        if (cookieBanner) cookieBanner.hidden = true;
+      }
+
+      function openCookieModal() {
+        if (!cookieModal) return;
+        cookieModal.classList.add("is-open");
+        cookieModal.setAttribute("aria-hidden", "false");
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeCookieModal() {
+        if (!cookieModal) return;
+        cookieModal.classList.remove("is-open");
+        cookieModal.setAttribute("aria-hidden", "true");
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+      }
+
+      function setSwitch(el, on) {
+        if (!el) return;
+        el.classList.toggle("is-on", !!on);
+        el.setAttribute("aria-checked", on ? "true" : "false");
+      }
+
+      function toggleSwitch(el) {
+        if (!el) return;
+        const on = el.classList.contains("is-on");
+        setSwitch(el, !on);
+      }
+
+      function bindSwitch(el) {
+        if (!el) return;
+        el.addEventListener("click", () => toggleSwitch(el));
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleSwitch(el);
+          }
+        });
+      }
+
+      function runDeferredScripts(category) {
+        const nodes = Array.from(document.querySelectorAll(`script[type="text/plain"][data-cookiecategory="${category}"]`));
+        nodes.forEach((old) => {
+          const s = document.createElement("script");
+          Array.from(old.attributes).forEach(attr => {
+            if (attr.name === "type") return;
+            s.setAttribute(attr.name, attr.value);
+          });
+          s.text = old.textContent || "";
+          old.parentNode?.insertBefore(s, old);
+          old.remove();
+        });
+      }
+
+      function applyConsent(consent) {
+        if (consent?.analytics) runDeferredScripts("analytics");
+        if (consent?.marketing) runDeferredScripts("marketing");
+      }
+
+      function acceptAll() {
+        const consent = { analytics: true, marketing: true };
+        writeConsent(consent);
+        applyConsent(consent);
+        hideBanner();
+        closeCookieModal();
+      }
+
+      function rejectAll() {
+        const consent = { analytics: false, marketing: false };
+        writeConsent(consent);
+        hideBanner();
+        closeCookieModal();
+      }
+
+      function savePrefs() {
+        const consent = {
+          analytics: !!toggleAnalytics?.classList.contains("is-on"),
+          marketing: !!toggleMarketing?.classList.contains("is-on")
+        };
+        writeConsent(consent);
+        applyConsent(consent);
+        hideBanner();
+        closeCookieModal();
+      }
+
+      function syncPrefsUI(consent) {
+        setSwitch(toggleAnalytics, !!consent?.analytics);
+        setSwitch(toggleMarketing, !!consent?.marketing);
+      }
+
+      bindSwitch(toggleAnalytics);
+      bindSwitch(toggleMarketing);
+
+      btnAcceptAll?.addEventListener("click", acceptAll);
+      btnAcceptAllM?.addEventListener("click", acceptAll);
+      btnReject?.addEventListener("click", rejectAll);
+
+      btnCustomize?.addEventListener("click", () => {
+        const current = readConsent() || { analytics: false, marketing: false };
+        syncPrefsUI(current);
+        openCookieModal();
+      });
+
+      btnSavePrefs?.addEventListener("click", savePrefs);
+      btnModalClose?.addEventListener("click", closeCookieModal);
+
+      cookieModal?.addEventListener("click", (e) => {
+        if (e.target === cookieModal) closeCookieModal();
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeCookieModal();
+      });
+
+      const existingConsent = readConsent();
+      if (!existingConsent) showBanner();
+      else applyConsent(existingConsent);
+
+      // Init
+      setActiveNav(activeFeed);
+      applyFilters();              // include syncLeftSidebarPlacement()
+      buildShots();
+      initRightFeaturedTabs();     // desktop
+      initMobileFeaturedTabs();    // mobile sheet
+      autoScrollNewsRail();
+      syncLeftSidebarPlacement();
+    })();
+  </script>
+</body>
+</html>
+
+
+

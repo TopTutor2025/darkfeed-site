@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy - darkfeed.it</title>
+
+  <style>
+    :root{
+      --max: 1080px;
+      --content: 760px;
+      --gap: 18px;
+
+      --bg: #0b0d10;
+      --text: rgba(231,233,238,.92);
+      --muted: rgba(231,233,238,.58);
+      --link: #7aa2ff;
+
+      --border: rgba(255,255,255,.06);
+      --hairline: rgba(255,255,255,.04);
+      --radius: 12px;
+      --radius-sm: 10px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .muted{ color: var(--muted); }
+    .small{ font-size: 13px; }
+
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11,13,16,.28);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .topbar__inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      opacity: .92;
+      min-width: 0;
+      padding: 6px 8px;
+      border-radius: 10px;
+      transition: background .15s ease, opacity .15s ease;
+    }
+    .brand:hover{
+      background: rgba(255,255,255,.04);
+      opacity: 1;
+    }
+    .brand__logo{
+      height: 26px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .pillBtn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(231,233,238,.92);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+      white-space: nowrap;
+    }
+    .pillBtn:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.14);
+      transform: translateY(-1px);
+    }
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
+
+    .page{
+      max-width: var(--content);
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+
+    .card{
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    h1{
+      margin: 0 0 10px 0;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: .2px;
+      color: rgba(231,233,238,.96);
+    }
+
+    h2{
+      margin: 16px 0 8px 0;
+      font-size: 15px;
+      font-weight: 800;
+      color: rgba(231,233,238,.95);
+      letter-spacing: .2px;
+    }
+
+    p{
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(231,233,238,.88);
+    }
+
+    ul{
+      margin: 10px 0 10px 18px;
+      padding: 0;
+      color: rgba(231,233,238,.88);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .link{
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: .95;
+    }
+
+    .divider{
+      height: 1px;
+      background: rgba(255,255,255,.05);
+      margin: 14px 0;
+    }
+
+    .table{
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+    }
+    .table th, .table td{
+      text-align: left;
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      vertical-align: top;
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgba(231,233,238,.88);
+    }
+    .table th{
+      font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: rgba(231,233,238,.60);
+      background: rgba(255,255,255,.02);
+    }
+    .table tr:last-child td{ border-bottom: 0; }
+
+    code{
+      background: rgba(255,255,255,.06);
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-size: 12.5px;
+    }
+
+    .footer{
+      width: 100%;
+      margin-top: 22px;
+      border-top: 1px solid var(--hairline);
+      background: rgba(11,13,16,.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .footer__inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 14px 26px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="/" aria-label="Homepage">
+        <img class="brand__logo" src="img/logo.png" alt="darkfeed.it">
+      </a>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="pillBtn" href="/">Torna al sito</a>
+        <a class="pillBtn" href="/cookie-policy.html">Cookie policy</a>
+        <button class="pillBtn" type="button" id="manageCookiesBtn">Gestisci cookie</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="page">
+      <div class="card">
+        <h1>Privacy Policy</h1>
+        <p class="muted small">
+          Informativa sul trattamento dei dati personali ai sensi degli artt. 13 e/o 14 del Regolamento (UE) 2016/679 (“GDPR”). :contentReference[oaicite:0]{index=0}
+        </p>
+        <p class="muted small">
+          Ultimo aggiornamento: <span id="lastUpdated">11 gennaio 2026</span>
+        </p>
+
+        <div class="divider"></div>
+
+        <h2>1. Titolare del trattamento</h2>
+        <p>
+          Titolare: <strong>[Ragione sociale / Nome e cognome]</strong><br>
+          Sede: <strong>[Indirizzo]</strong><br>
+          Email: <a class="link" href="mailto:[email@dominio.it]">[email@dominio.it]</a><br>
+          (eventuale) DPO/Referente privacy: <a class="link" href="mailto:[dpo@dominio.it]">[dpo@dominio.it]</a>
+        </p>
+
+        <h2>2. Normativa di riferimento</h2>
+        <p>
+          Il trattamento dei dati personali è svolto nel rispetto del GDPR e della normativa nazionale applicabile, inclusi:
+        </p>
+        <ul>
+          <li>Regolamento (UE) 2016/679 (GDPR). :contentReference[oaicite:1]{index=1}</li>
+          <li>D.Lgs. 196/2003 (“Codice Privacy”), come modificato dal D.Lgs. 101/2018. :contentReference[oaicite:2]{index=2}</li>
+        </ul>
+
+        <h2>3. Tipologie di dati trattati</h2>
+        <p>In relazione all’utilizzo del sito, possono essere trattate le seguenti categorie di dati:</p>
+        <ul>
+          <li><strong>Dati di navigazione</strong>: informazioni raccolte dai sistemi informatici e dalle procedure software preposte al funzionamento del sito (es. indirizzi IP, log, URI/URL, orario della richiesta, user-agent). Tali dati sono necessari per la fruizione del servizio e per la sicurezza.</li>
+          <li><strong>Dati forniti volontariamente</strong>: dati trasmessi dall’utente tramite contatti (es. email), richieste, segnalazioni o interazioni analoghe.</li>
+          <li><strong>Dati relativi a preferenze e consensi</strong>: scelte dell’utente relative a cookie e strumenti di tracciamento (memorizzate, ad esempio, nel browser).</li>
+        </ul>
+
+        <h2>4. Finalità del trattamento e basi giuridiche</h2>
+        <p>
+          Le finalità e le basi giuridiche (art. 6 GDPR) possono includere, a seconda dei servizi effettivamente attivi sul sito: :contentReference[oaicite:3]{index=3}
+        </p>
+
+        <table class="table" aria-label="Finalità e basi giuridiche">
+          <thead>
+            <tr>
+              <th>Finalità</th>
+              <th>Esempi</th>
+              <th>Base giuridica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Funzionamento e sicurezza del sito</td>
+              <td>Gestione tecnica, prevenzione abusi, log di sicurezza</td>
+              <td>Legittimo interesse del Titolare (art. 6(1)(f) GDPR) e/o adempimento di obblighi legali (art. 6(1)(c))</td>
+            </tr>
+            <tr>
+              <td>Gestione richieste e contatti</td>
+              <td>Rispondere a email o richieste dell’utente</td>
+              <td>Esecuzione di misure precontrattuali/contrattuali su richiesta dell’interessato (art. 6(1)(b)) e/o legittimo interesse (art. 6(1)(f))</td>
+            </tr>
+            <tr>
+              <td>Misurazione e miglioramento (analytics)</td>
+              <td>Statistiche di visita e performance</td>
+              <td>Consenso (art. 6(1)(a)), salvo casi di equiparazione ai tecnici secondo le regole applicabili</td>
+            </tr>
+            <tr>
+              <td>Pubblicità e profilazione</td>
+              <td>Ads, remarketing, misurazione campagne</td>
+              <td>Consenso (art. 6(1)(a))</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>5. Cookie e strumenti di tracciamento</h2>
+        <p>
+          Per informazioni su cookie e tecnologie similari, incluse le modalità di gestione del consenso, consulta la
+          <a class="link" href="/cookie-policy.html">Cookie Policy</a>.
+        </p>
+        <p class="muted small">
+          Nota: per i profili “cookie”, in Italia sono rilevanti anche le indicazioni del Garante Privacy (es. Linee guida 10 giugno 2021). :contentReference[oaicite:4]{index=4}
+        </p>
+
+        <h2>6. Modalità del trattamento</h2>
+        <p>
+          Il trattamento è effettuato con strumenti elettronici e, ove necessario, cartacei, secondo principi di liceità, correttezza e trasparenza,
+          nonché con misure tecniche e organizzative adeguate a garantire un livello di sicurezza appropriato al rischio (art. 32 GDPR). :contentReference[oaicite:5]{index=5}
+        </p>
+
+        <h2>7. Destinatari dei dati</h2>
+        <p>
+          I dati possono essere trattati da personale autorizzato e/o da soggetti che operano in qualità di Responsabili del trattamento (art. 28 GDPR),
+          nonché comunicati a soggetti pubblici/autorità nei casi previsti dalla legge. :contentReference[oaicite:6]{index=6}
+        </p>
+        <p class="muted small">
+          Esempi di categorie di fornitori: hosting e manutenzione tecnica, fornitori di servizi email, servizi di analytics/advertising (se attivati), piattaforme di contenuti incorporati.
+        </p>
+
+        <h2>8. Trasferimenti verso Paesi terzi</h2>
+        <p>
+          Ove alcuni fornitori siano localizzati fuori dallo Spazio Economico Europeo, i trasferimenti avvengono nel rispetto delle condizioni previste dal GDPR
+          (Capo V: decisioni di adeguatezza, garanzie adeguate, ecc.). :contentReference[oaicite:7]{index=7}
+        </p>
+
+        <h2>9. Periodo di conservazione</h2>
+        <p>
+          I dati sono conservati per il tempo strettamente necessario al perseguimento delle finalità sopra indicate, salvo obblighi di legge o esigenze di tutela (es. sicurezza e difesa in giudizio).
+        </p>
+        <ul>
+          <li><strong>Log tecnici/sicurezza</strong>: per un periodo limitato, in base a necessità tecniche e policy di sicurezza.</li>
+          <li><strong>Richieste dell’utente</strong>: per il tempo necessario a gestire la richiesta e per eventuali esigenze di tutela.</li>
+          <li><strong>Preferenze cookie</strong>: fino a cancellazione/aggiornamento da parte dell’utente o secondo durata impostata dalla soluzione adottata.</li>
+        </ul>
+
+        <h2>10. Diritti dell’interessato</h2>
+        <p>
+          L’utente può esercitare i diritti previsti dagli artt. 15-22 GDPR (accesso, rettifica, cancellazione, limitazione, portabilità, opposizione),
+          nonché revocare il consenso in qualsiasi momento senza pregiudicare la liceità del trattamento basata sul consenso prima della revoca.
+          :contentReference[oaicite:8]{index=8}
+        </p>
+        <p>
+          È inoltre possibile proporre reclamo all’Autorità di controllo competente (in Italia: Garante per la protezione dei dati personali). :contentReference[oaicite:9]{index=9}
+        </p>
+
+        <h2>11. Come esercitare i diritti</h2>
+        <p>
+          Per richieste relative alla privacy e all’esercizio dei diritti, contatta il Titolare ai recapiti indicati nella sezione 1.
+        </p>
+
+        <h2>12. Contenuti incorporati e link esterni</h2>
+        <p>
+          Il sito può includere contenuti di terze parti (es. video, post social, embed). L’interazione con tali contenuti può comportare trattamenti
+          effettuati da terzi secondo le rispettive politiche. Si invita l’utente a consultare le informative dei relativi fornitori.
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="muted small">
+          Nota: questo testo è un modello da completare con i dati del Titolare, l’elenco effettivo dei servizi attivi (analytics, adv, newsletter, form, commenti),
+          e i tempi di conservazione adottati.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="muted small">
+        © <span id="year"></span> darkfeed.it - Privacy Policy
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      // Coerenza con la tua implementazione banner (chiave storage)
+      const CONSENT_KEY = "df_cookie_consent_v1";
+      const btn = document.getElementById("manageCookiesBtn");
+
+      function resetConsentAndGoHome(){
+        try { localStorage.removeItem(CONSENT_KEY); } catch(_){}
+        // Torna alla home: il banner (se presente) si ripresenterà.
+        window.location.href = "/";
+      }
+
+      btn?.addEventListener("click", resetConsentAndGoHome);
+    })();
+  </script>
+</body>
+</html>

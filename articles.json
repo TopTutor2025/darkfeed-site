@@ -1,0 +1,159 @@
+[
+  {
+    "id": "art-2026-01-16-geo-rotte",
+    "dateISO": "2026-01-16",
+    "category": "geopolitica",
+    "title": "Rotte critiche e deterrenza: dove si concentra il rischio di interruzione",
+    "subtitle": "Punti di strozzatura, assicurazioni, tempi di transito e rischi secondari sulla supply chain.",
+    "body": "I principali colli di bottiglia logistici agiscono come moltiplicatori di rischio: basta un rallentamento localizzato per produrre effetti a cascata su costi, tempi e disponibilità di beni intermedi.\n\nTre indicatori da monitorare:\n1) premi assicurativi e war risk (segnale anticipatore di stress),\n2) deviazioni di rotta e tempi medi di transito,\n3) volatilità dei noli e dei contratti spot.\n\nNel breve, lo scenario tende a oscillare tra normalizzazione tattica e shock puntuali. Nel medio, contano le capacità di sostituzione (alternative di rotta, scorte, nearshoring) e la credibilità della deterrenza.",
+    "highlight": "Quando i premi assicurativi salgono prima dei noli, spesso stai osservando il rischio prima che arrivi al prezzo.",
+    "featured": true,
+    "thumb": "https://darkfeed.online/assets/thumbs/geo-rotte.jpg",
+    "media": {
+      "type": "image",
+      "src": "https://darkfeed.online/assets/media/geo-rotte.jpg",
+      "alt": "Rotte marittime e colli di bottiglia"
+    },
+    "sources": [
+      { "label": "IMO", "url": "https://www.imo.org/" },
+      { "label": "UNCTAD", "url": "https://unctad.org/" }
+    ]
+  },
+  {
+    "id": "art-2026-01-15-fin-tassi",
+    "dateISO": "2026-01-15",
+    "category": "finanza",
+    "title": "Tassi, duration e rischio di reinvestimento: come leggere la curva",
+    "subtitle": "Perché un taglio (o un rialzo) non basta: conta il percorso atteso e il premio a termine.",
+    "body": "La curva dei rendimenti incorpora aspettative sui tassi futuri e un premio a termine. Quando la curva si muove, il mercato sta spesso riscrivendo due cose: (i) lo scenario macro (crescita/inflazione) e (ii) la tolleranza al rischio.\n\nChecklist operativa:\n- Se il tratto breve si muove più del lungo: repricing della policy.\n- Se il lungo sale mentre il breve scende: aumento del term premium.\n- Se lo spread si restringe con volatilità: risk-off e ricerca di qualità.\n\nPer portafogli con obbligazionario, attenzione al rischio di reinvestimento: flussi che scadono in un regime di tassi diverso possono cambiare il profilo di rendimento complessivo.",
+    "highlight": "La curva non è un numero: è una narrativa compressa in prezzi.",
+    "featured": true,
+    "thumb": "https://darkfeed.online/assets/thumbs/fin-curva.jpg",
+    "media": {
+      "type": "image",
+      "src": "https://darkfeed.online/assets/media/fin-curva.jpg",
+      "alt": "Curva dei rendimenti e spread"
+    },
+    "sources": [
+      { "label": "BIS", "url": "https://www.bis.org/" },
+      { "label": "ECB", "url": "https://www.ecb.europa.eu/" }
+    ]
+  },
+  {
+    "id": "art-2026-01-14-tech-export",
+    "dateISO": "2026-01-14",
+    "category": "tecnologia",
+    "title": "Restrizioni all’export e chip avanzati: rischio supply chain e “compliance shock”",
+    "subtitle": "Impatto su progettazione, procurement e time-to-market.",
+    "body": "Le restrizioni su componentistica avanzata non colpiscono solo la disponibilità: alzano i costi di compliance, aumentano i lead time e riducono la fungibilità dei fornitori.\n\nEffetti tipici:\n- redesign di prodotto per rientrare in soglie regolatorie,\n- aumento della concentrazione su pochi vendor autorizzati,\n- crescita dei costi indiretti (legale, audit, due diligence).\n\nPer chi opera su hardware/AI, la resilienza passa da scelte architetturali (modularità), contratti (second source) e inventario (buffer mirato).",
+    "highlight": "Il vero shock spesso non è la carenza: è la burocrazia che rende lenta ogni alternativa.",
+    "featured": false,
+    "thumb": "https://darkfeed.online/assets/thumbs/tech-chip.jpg",
+    "media": {
+      "type": "image",
+      "src": "https://darkfeed.online/assets/media/tech-chip.jpg",
+      "alt": "Chip e circuiti su scheda"
+    },
+    "sources": [
+      { "label": "Wassenaar Arrangement", "url": "https://www.wassenaar.org/" },
+      { "label": "OECD", "url": "https://www.oecd.org/" }
+    ]
+  },
+  {
+    "id": "art-2026-01-13-pol-bilancio",
+    "dateISO": "2026-01-13",
+    "category": "politica",
+    "title": "Manovra e misure settoriali: dove può nascere l’attrito politico",
+    "subtitle": "Vincoli di bilancio, priorità di coalizione e trade-off regolatori.",
+    "body": "Le misure di politica economica sono spesso un compromesso tra obiettivi dichiarati e vincoli di finanza pubblica. L’attrito emerge tipicamente su:\n- coperture e rimodulazioni,\n- selettività dei benefici,\n- tempi di attuazione e decreti attuativi.\n\nPer valutare la probabilità di esecuzione, più che i titoli contano: (i) calendario, (ii) capacità amministrativa, (iii) convergenza degli attori chiave. In contesti frammentati, la certezza normativa si riduce e aumenta il valore delle clausole di salvaguardia e delle misure transitorie.",
+    "highlight": "Il rischio politico più comune è lo slittamento: non il no, ma il rinvio.",
+    "featured": false,
+    "thumb": "https://darkfeed.online/assets/thumbs/pol-agenda.jpg",
+    "media": {
+      "type": "none"
+    },
+    "sources": [
+      { "label": "Camera dei Deputati", "url": "https://www.camera.it/" },
+      { "label": "Senato della Repubblica", "url": "https://www.senato.it/" }
+    ]
+  },
+  {
+    "id": "art-2026-01-12-fin-commodities",
+    "dateISO": "2026-01-12",
+    "category": "finanza",
+    "title": "Materie prime: volatilità implicita e segnali dal mercato fisico",
+    "subtitle": "Backwardation/contango, scorte e differenziali regionali.",
+    "body": "Sulle commodity, la volatilità dei prezzi è spesso un riflesso del mercato fisico (scorte, colli di bottiglia, logistica). La struttura a termine (backwardation o contango) è un indicatore chiave:\n- Backwardation: tensione nel pronto e scarsità relativa.\n- Contango: abbondanza nel breve o domanda debole, con costo di carry.\n\nIndicatori da seguire:\n- livelli di stock pubblici/privati,\n- differenziali regionali e premi di qualità,\n- costo di trasporto e disponibilità di stoccaggio.\n\nPer chi usa commodity come hedge, è cruciale distinguere tra shock di offerta e shock di domanda: reagiscono in modo diverso su valute e tassi.",
+    "highlight": "Se il fisico si stringe, il future prima o poi lo segue: la domanda è quando, non se.",
+    "featured": false,
+    "thumb": "https://darkfeed.online/assets/thumbs/fin-commodities.jpg",
+    "media": {
+      "type": "image",
+      "src": "https://darkfeed.online/assets/media/fin-commodities.jpg",
+      "alt": "Materia prima e grafici di prezzo"
+    },
+    "sources": [
+      { "label": "IEA", "url": "https://www.iea.org/" },
+      { "label": "World Bank", "url": "https://www.worldbank.org/" }
+    ]
+  },
+  {
+    "id": "art-2026-01-11-geo-cyber",
+    "dateISO": "2026-01-11",
+    "category": "geopolitica",
+    "title": "Cyber e infrastrutture: perché gli attacchi ibridi contano più dei titoli",
+    "subtitle": "Impatto su energia, trasporti e fiducia istituzionale.",
+    "body": "Gli attacchi cyber su infrastrutture critiche e supply chain digitali producono effetti sproporzionati perché colpiscono coordinamento e fiducia, oltre che asset tecnici.\n\nNella pratica, la resilienza dipende da:\n- segmentazione di rete e gestione privilegi,\n- backup testati e piani di ripristino (RTO/RPO),\n- gestione dei fornitori (terze parti) e patching.\n\nSul fronte geopolitico, il cyber è un vettore “plausibly deniable”: difficile attribuzione, alto impatto narrativo. Questo rende il rischio persistente anche in fasi di apparente distensione.",
+    "highlight": "Il danno maggiore non è l’interruzione: è la perdita di fiducia nei sistemi.",
+    "featured": false,
+    "thumb": "https://darkfeed.online/assets/thumbs/geo-cyber.jpg",
+    "media": {
+      "type": "image",
+      "src": "https://darkfeed.online/assets/media/geo-cyber.jpg",
+      "alt": "Schermate e sicurezza informatica"
+    },
+    "sources": [
+      { "label": "ENISA", "url": "https://www.enisa.europa.eu/" },
+      { "label": "NIST", "url": "https://www.nist.gov/" }
+    ]
+  },
+  {
+    "id": "art-2026-01-10-tech-ai-reg",
+    "dateISO": "2026-01-10",
+    "category": "tecnologia",
+    "title": "Regolazione AI: rischio operativo tra compliance, audit e data governance",
+    "subtitle": "Cosa cambia quando i modelli entrano in processi “core”.",
+    "body": "Quando l’AI passa da sperimentazione a produzione, emergono tre costi: governance dei dati, controlli di rischio e auditabilità.\n\nUna mappa pratica:\n- Data lineage e qualità (chi ha prodotto cosa, quando, e con quali permessi).\n- Monitoraggio drift e performance (non solo accuracy: anche bias e robustezza).\n- Procedure di incident response (output errati, dati sensibili, uso improprio).\n\nL’ottimizzazione non è solo tecnica: serve un modello di controllo interno che renda sostenibile l’adozione su larga scala.",
+    "highlight": "La scalabilità dell’AI è un problema di processi prima che di modelli.",
+    "featured": false,
+    "thumb": "https://darkfeed.online/assets/thumbs/tech-ai.jpg",
+    "media": {
+      "type": "none"
+    },
+    "sources": [
+      { "label": "European Commission", "url": "https://commission.europa.eu/" },
+      { "label": "ISO", "url": "https://www.iso.org/" }
+    ]
+  },
+  {
+    "id": "art-2026-01-09-pol-media",
+    "dateISO": "2026-01-09",
+    "category": "politica",
+    "title": "Narrazione e consenso: come cambia il ciclo dell’attenzione pubblica",
+    "subtitle": "Dati, agenda setting e polarizzazione: metriche utili e limiti.",
+    "body": "Il ciclo dell’attenzione è sempre più breve e frammentato. La conseguenza è una competizione costante per l’agenda, in cui la velocità spesso batte la profondità.\n\nMetriche che aiutano:\n- ritmo di sostituzione dei temi (topic churn),\n- densità di contenuti “reattivi” rispetto a “propositivi”,\n- asimmetria tra copertura mediatica e impatto reale.\n\nIn contesti polarizzati, la correzione informativa può avere rendimenti decrescenti: la fiducia nella fonte conta quanto (o più di) la qualità del contenuto.",
+    "highlight": "Quando l’attenzione è scarsa, vince chi impone il frame, non chi ha più ragione.",
+    "featured": false,
+    "thumb": "https://darkfeed.online/assets/thumbs/pol-frame.jpg",
+    "media": {
+      "type": "image",
+      "src": "https://darkfeed.online/assets/media/pol-frame.jpg",
+      "alt": "Schermo con notizie e social feed"
+    },
+    "sources": [
+      { "label": "Our World in Data", "url": "https://ourworldindata.org/" },
+      { "label": "Pew Research Center", "url": "https://www.pewresearch.org/" }
+    ]
+  }
+]
+

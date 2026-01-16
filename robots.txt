@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+# Sitemap (consigliata)
+Sitemap: https://darkfeed.online/sitemap.xml

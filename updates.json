@@ -1,0 +1,65 @@
+[
+  {
+    "id": "upd-2026-01-16-001",
+    "ts": "2026-01-16T08:42:00Z",
+    "time": "09:42",
+    "handle": "@DarkFeed",
+    "xUrl": "https://x.com/",
+    "topic": "geopolitica",
+    "text": "Fonti diplomatiche indicano consultazioni informali su sicurezza delle rotte e protezione delle infrastrutture critiche."
+  },
+  {
+    "id": "upd-2026-01-16-002",
+    "ts": "2026-01-16T10:15:00Z",
+    "time": "11:15",
+    "handle": "@DarkFeed",
+    "xUrl": "https://x.com/",
+    "topic": "finanza",
+    "text": "Apertura cauta sui mercati europei: volumi contenuti, curva dei rendimenti poco mossa sul tratto lungo."
+  },
+  {
+    "id": "upd-2026-01-16-003",
+    "ts": "2026-01-16T12:08:00Z",
+    "time": "13:08",
+    "handle": "@DarkFeed",
+    "xUrl": "https://x.com/",
+    "topic": "tecnologia",
+    "text": "Nuove indicazioni operative su export control: imprese high-tech valutano impatto su lead time e costi di compliance."
+  },
+  {
+    "id": "upd-2026-01-16-004",
+    "ts": "2026-01-16T14:37:00Z",
+    "time": "15:37",
+    "handle": "@DarkFeed",
+    "xUrl": "https://x.com/",
+    "topic": "politica",
+    "text": "Calendario parlamentare rivisto: possibili slittamenti su alcune misure chiave, attenzione ai decreti attuativi."
+  },
+  {
+    "id": "upd-2026-01-16-005",
+    "ts": "2026-01-16T16:55:00Z",
+    "time": "17:55",
+    "handle": "@DarkFeed",
+    "xUrl": "https://x.com/",
+    "topic": "finanza",
+    "text": "Volatilità implicita in lieve aumento su valute selezionate; operatori monitorano livelli tecnici e flussi di copertura."
+  },
+  {
+    "id": "upd-2026-01-16-006",
+    "ts": "2026-01-16T18:22:00Z",
+    "time": "19:22",
+    "handle": "@DarkFeed",
+    "xUrl": "https://x.com/",
+    "topic": "geopolitica",
+    "text": "Discussioni in corso su corridoi energetici alternativi: impatti potenziali su costi di trasporto nel medio termine."
+  },
+  {
+    "id": "upd-2026-01-16-007",
+    "ts": "2026-01-16T20:10:00Z",
+    "time": "21:10",
+    "handle": "@DarkFeed",
+    "xUrl": "https://x.com/",
+    "topic": "tecnologia",
+    "text": "Focus su cyber e infrastrutture: aumento dell’attenzione su piani di continuità operativa e test di resilienza."
+  }
+]

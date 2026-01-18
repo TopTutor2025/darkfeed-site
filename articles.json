@@ -21,6 +21,30 @@
     ]
   },
   {
+  "id": "geopolitica-video-esempio-001",
+  "title": "Escalation nel Mar Rosso: cosa cambia per le rotte globali",
+  "subtitle": "Analisi geopolitica con supporto video e fonti OSINT",
+  "category": "geopolitica",
+  "dateISO": "2026-01-18",
+  "body": "L’intensificarsi delle tensioni nel Mar Rosso sta modificando le rotte commerciali globali, con impatti diretti su costi, tempi di consegna e sicurezza energetica.\n\nNel video allegato vengono analizzati i movimenti navali, le implicazioni strategiche per l’Europa e il ruolo degli attori regionali coinvolti.\n\nQuesto scenario evidenzia come i colli di bottiglia marittimi restino uno dei principali punti di vulnerabilità dell’economia globale.",
+  "media": {
+    "type": "youtube",
+    "youtubeId": "dQw4w9WgXcQ"
+  },
+  "sources": [
+    {
+      "label": "Reuters",
+      "url": "https://www.reuters.com/"
+    },
+    {
+      "label": "Institute for the Study of War",
+      "url": "https://www.understandingwar.org/"
+    }
+  ],
+  "featured": true
+}
+
+  {
     "id": "art-2026-01-15-fin-tassi",
     "dateISO": "2026-01-15",
     "category": "finanza",
@@ -157,5 +181,6 @@
     ]
   }
 ]
+
 
 

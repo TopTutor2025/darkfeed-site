@@ -1,868 +1,377 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>NightPulse — Geopolitica • Business • Tecnologia</title>
-  <meta name="description" content="Analisi di geopolitica, business e tecnologia in stile cyberpunk dark." />
+<!doctype html><html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Darkfeed — Analisi di geopolitica, business e tecnologia</title>
+<meta name="description" content="Darkfeed: analisi di geopolitica, business e tecnologia. Scenari in evoluzione, insight operativi e fonti.">
+<meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#07080b">
+<link rel="canonical" href="https://www.darkfeed.online/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Darkfeed">
+<meta property="og:title" content="Darkfeed — Analisi di geopolitica, business e tecnologia">
+<meta property="og:description" content="Scenari in evoluzione e analisi operative su geopolitica, business e tecnologia.">
+<meta property="og:url" content="https://www.darkfeed.online/">
+<meta property="og:image" content="https://www.darkfeed.online/og/og-home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Darkfeed — Analisi geopolitica, business e tecnologia">
+<meta name="twitter:description" content="Scenari in evoluzione e analisi operative su geopolitica, business e tecnologia.">
+<meta name="twitter:image" content="https://www.darkfeed.online/og/og-home.jpg">
+<link rel="icon" href="/assets/favicon.ico" sizes="any"><link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.darkfeed.online/#org","name":"Darkfeed","url":"https://www.darkfeed.online/","logo":{"@type":"ImageObject","url":"https://www.darkfeed.online/assets/apple-touch-icon.png"},"sameAs":["https://x.com","https://youtube.com","https://patreon.com"]},{"@type":"WebSite","@id":"https://www.darkfeed.online/#website","url":"https://www.darkfeed.online/","name":"Darkfeed","publisher":{"@id":"https://www.darkfeed.online/#org"},"inLanguage":"it-IT"}]}</script>
 
-  <style>
-    :root{
-      --bg:#07080b;
-      --panel: rgba(13, 15, 22, .72);
-      --text:#e9eef6;
-      --muted:#9aa7bd;
-      --faint:#6b7890;
+<style>
+:root{--bg:#07080b;--t:#e9eef6;--m:#9aa7bd;--f:#6b7890;--y:#fcee09;--c:#00f0ff;--p:#ff00a8;--sh:0 18px 60px rgba(0,0,0,.55);--r:18px;--r2:22px;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:var(--font);color:var(--t);background:radial-gradient(1200px 900px at 20% -10%,rgba(0,240,255,.10),transparent 60%),radial-gradient(900px 700px at 90% 10%,rgba(255,0,168,.10),transparent 55%),radial-gradient(900px 900px at 50% 120%,rgba(252,238,9,.07),transparent 55%),linear-gradient(180deg,#05060a 0%,var(--bg) 25%,#060713 100%);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.scan{position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.03),rgba(255,255,255,.03) 1px,transparent 2px,transparent 6px);mix-blend-mode:overlay;opacity:.06;z-index:2}
 
-      --yellow:#fcee09;
-      --cyan:#00f0ff;
-      --magenta:#ff00a8;
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:10px 0 8px;padding-top:calc(10px + env(safe-area-inset-top));backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);background:rgba(8,10,16,.80);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 12px 40px rgba(0,0,0,.25);transform:translateY(0);transition:transform .24s ease}
+.nav--hidden{transform:translateY(calc(-1*(var(--navh,120px) + 12px)))}
+.navin{width:100%;max-width:720px;margin:0 auto;padding:0 12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.logo{width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.14);object-fit:cover;box-shadow:0 0 .5px rgba(255,0,168,.9),0 0 22px rgba(255,0,168,.18)}
+.q{width:min(54vw,320px);height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(10,12,20,.42);color:var(--t);padding:0 12px;font-weight:800;font-size:12px;box-shadow:inset 0 0 0 1px rgba(0,240,255,.08);outline:none}
+.q::placeholder{color:var(--f);font-weight:800}.q:focus{border-color:rgba(0,240,255,.30)}
+.nav__cats{width:100%}
+.cat{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 2px 4px}.cat::-webkit-scrollbar{height:0}
+.chip{flex:0 0 auto;cursor:pointer;user-select:none;white-space:nowrap;border-radius:999px;padding:6px 9px;border:1px solid rgba(255,255,255,.10);background:rgba(10,12,20,.42);color:var(--t);font-weight:800;font-size:11px;letter-spacing:.2px;display:flex;align-items:center;gap:6px;box-shadow:inset 0 0 0 1px rgba(0,240,255,.08);transition:.12s}
+.chip:active{transform:scale(.985)}
+.chip[aria-selected="true"]{border-color:rgba(252,238,9,.40);background:linear-gradient(135deg,rgba(252,238,9,.14),transparent 60%),rgba(10,12,20,.48);box-shadow:inset 0 0 0 1px rgba(252,238,9,.12),0 0 22px rgba(252,238,9,.12)}
 
-      --border: rgba(255,255,255,.10);
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --glow-cyan: 0 0 .5px rgba(0,240,255,.9), 0 0 22px rgba(0,240,255,.22);
-      --glow-mag: 0 0 .5px rgba(255,0,168,.9), 0 0 22px rgba(255,0,168,.18);
-      --glow-yellow: 0 0 .5px rgba(252,238,9,.9), 0 0 22px rgba(252,238,9,.16);
+/* LAYOUT */
+.wrap{max-width:720px;margin:0 auto;padding:calc(var(--navh,120px) + 14px) 12px 150px}
+.layout{display:block}
+.sideCol{display:none}
+.sideSticky{position:sticky;top:calc(var(--navh,120px) + 18px)}
 
-      --radius:18px;
-      --radius2:22px;
-      --nav-h:64px;
+/* HERO */
+.hero{border-radius:var(--r2);padding:14px;background:linear-gradient(135deg,rgba(0,240,255,.16),transparent 40%),linear-gradient(225deg,rgba(255,0,168,.14),transparent 45%),rgba(10,12,18,.62);border:1px solid rgba(255,255,255,.10);box-shadow:var(--sh);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-2px;background:radial-gradient(900px 140px at 25% 0%,rgba(252,238,9,.18),transparent 60%),radial-gradient(700px 160px at 90% 0%,rgba(0,240,255,.16),transparent 65%),radial-gradient(800px 220px at 60% 120%,rgba(255,0,168,.10),transparent 60%);opacity:.85;pointer-events:none}
+.hero>*{position:relative}
+.k{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:var(--m)}
+.dot{width:8px;height:8px;border-radius:999px;background:var(--c);box-shadow:0 0 .5px rgba(0,240,255,.9),0 0 22px rgba(0,240,255,.22)}
+.h1{margin:10px 0 0;font-size:20px;line-height:1.15;font-weight:950}.h1 span{color:var(--y);text-shadow:0 0 18px rgba(252,238,9,.18)}
+.sub{margin:10px 0 0;color:var(--m);font-size:13px;line-height:1.45}
 
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-    }
+/* SECTIONS */
+.sec{margin-top:14px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-bottom:10px}
+.tt{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:.9px;text-transform:uppercase;color:var(--m)}
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 900px at 20% -10%, rgba(0,240,255,.10), transparent 60%),
-        radial-gradient(900px 700px at 90% 10%, rgba(255,0,168,.10), transparent 55%),
-        radial-gradient(900px 900px at 50% 120%, rgba(252,238,9,.07), transparent 55%),
-        linear-gradient(180deg, #05060a 0%, var(--bg) 25%, #060713 100%);
-      overflow-x:hidden;
-    }
+/* EVO */
+.evoShell{position:relative;border-radius:var(--r2);overflow:hidden}
+.evoShell:before,.evoShell:after{content:"";position:absolute;top:0;bottom:0;width:26px;z-index:3;pointer-events:none}
+.evoShell:before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.evoShell:after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+.evo{display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px}.evo::-webkit-scrollbar{height:0}
+.card{flex:0 0 82%;min-height:92px;border-radius:var(--r);padding:12px 12px 10px;background:linear-gradient(145deg,rgba(0,240,255,.14),transparent 52%),rgba(10,12,20,.62);border:1px solid rgba(255,255,255,.10);box-shadow:var(--sh);position:relative;overflow:hidden}
+.card:after{content:"";position:absolute;inset:auto -40px 10px auto;width:120px;height:120px;background:radial-gradient(circle at 30% 30%,rgba(255,0,168,.22),transparent 60%);opacity:.9}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;position:relative}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;padding:6px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.20);box-shadow:inset 0 0 0 1px rgba(0,240,255,.10)}
+.pill{width:8px;height:8px;border-radius:999px;background:var(--c);box-shadow:0 0 .5px rgba(0,240,255,.9),0 0 22px rgba(0,240,255,.22)}
+.dt{font-family:var(--mono);font-size:11px;color:var(--m);white-space:nowrap}
+.txt{margin:0;font-size:13px;line-height:1.35;font-weight:900}
 
-    a{ color:inherit; text-decoration:none; }
+/* FEED */
+.feed{display:flex;flex-direction:column;gap:14px}
+.post{border-radius:var(--r2);border:1px solid rgba(255,255,255,.10);background:linear-gradient(135deg,rgba(255,0,168,.10),transparent 42%),linear-gradient(225deg,rgba(0,240,255,.10),transparent 50%),rgba(10,12,20,.62);box-shadow:var(--sh);overflow:hidden}
+.post.flash{outline:2px solid rgba(252,238,9,.35);box-shadow:0 0 0 1px rgba(252,238,9,.18),var(--sh)}
+.meta{padding:14px 14px 10px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.12)}
+.ml{display:flex;align-items:center;gap:10px;min-width:0}
+.ptag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.9px;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.20);box-shadow:inset 0 0 0 1px rgba(252,238,9,.10);white-space:nowrap}
+.ptag .pill{background:var(--y);box-shadow:0 0 .5px rgba(252,238,9,.9),0 0 22px rgba(252,238,9,.16)}
+.pdate{font-family:var(--mono);font-size:11px;color:var(--m);white-space:nowrap}
+.body{padding:14px}
+.h3{margin:0;font-size:18px;line-height:1.15;font-weight:950}
+.st{margin:8px 0 0;color:var(--m);font-size:13px;line-height:1.45}
+.media{margin-top:12px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 1px rgba(0,240,255,.10)}
+.media img{width:100%;height:220px;object-fit:cover;display:block;filter:saturate(1.05) contrast(1.05)}
+.yt{position:relative;width:100%;padding-top:56.25%;background:#000}.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.hl{margin-top:12px;border-radius:18px;padding:12px;background:linear-gradient(135deg,rgba(252,238,9,.14),rgba(255,0,168,.10)),rgba(10,12,20,.64);border:1px solid rgba(252,238,9,.22);box-shadow:inset 0 0 0 1px rgba(0,240,255,.10)}
+.hk{margin:0 0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:var(--m)}
+.ht{margin:0;font-size:13px;line-height:1.45;font-weight:900}
+.ct{margin-top:12px;font-size:13px;line-height:1.6;color:rgba(233,238,246,.92)}.ct p{margin:0 0 10px}.ct p:last-child{margin:0}
+.ft{margin-top:12px;display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+.srcs{display:flex;flex-wrap:wrap;gap:8px}
+.src{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.18);font-weight:900;font-size:12px;transition:.12s}
+.src:hover{border-color:rgba(0,240,255,.34)}.src:active{transform:scale(.985)}
+.sdot{width:7px;height:7px;border-radius:999px;background:var(--c);box-shadow:0 0 .5px rgba(0,240,255,.9),0 0 22px rgba(0,240,255,.22)}
+.auth{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--m);font-family:var(--mono);font-size:11px}
+.auth strong{color:var(--t);font-family:var(--font);font-weight:950}
+.empty{display:none;margin-top:12px;padding:14px;border-radius:18px;border:1px solid rgba(255,0,168,.28);background:rgba(255,0,168,.08);color:var(--m)}.empty strong{color:var(--t)}
+.loader{margin:14px 0 0;border-radius:18px;border:1px dashed rgba(0,240,255,.30);background:rgba(0,240,255,.06);padding:12px;color:var(--m);font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;display:none}.loader.on{display:block}
 
-    /* NAVBAR 80% opaque, hide down / show up */
-    .nav{
-      position:fixed; top:0; left:0; right:0;
-      height:var(--nav-h);
-      z-index:50;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 10px 14px calc(10px + env(safe-area-inset-top));
-      padding-top: calc(10px + env(safe-area-inset-top));
-      backdrop-filter: blur(14px) saturate(140%);
-      -webkit-backdrop-filter: blur(14px) saturate(140%);
-      background: rgba(8, 10, 16, .80);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-      transform: translateY(0);
-      transition: transform .26s ease;
-    }
-    .nav--hidden{
-      transform: translateY(calc(-1 * (var(--nav-h) + env(safe-area-inset-top) + 12px)));
-    }
+/* PREVIEW CARD (riuso .pr, .th, .pm, .pk, .pt per sidebar/mobile) */
+.pr{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:rgba(10,12,20,.52);box-shadow:inset 0 0 0 1px rgba(0,240,255,.10);transition:.12s}
+.pr:active{transform:scale(.985)}.pr:hover{border-color:rgba(0,240,255,.30)}
+.th{width:52px;height:52px;border-radius:12px;border:1px solid rgba(255,255,255,.12);object-fit:cover;box-shadow:inset 0 0 0 1px rgba(0,240,255,.10);background:rgba(0,0,0,.25)}
+.pm{min-width:0;display:flex;flex-direction:column;gap:4px}
+.pk{font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pt{font-size:12px;line-height:1.15;font-weight:900;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
-    .nav__left, .nav__right{ display:flex; align-items:center; gap:10px; }
+/* MOBILE BOTTOM BAR */
+.bb{position:fixed;left:0;right:0;bottom:env(safe-area-inset-bottom);z-index:60;pointer-events:none;transform:translateY(calc(100% + 14px));transition:transform .24s ease}
+.bb.on{transform:translateY(0)}
+.bb .in{pointer-events:auto;margin:10px 12px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(8,10,16,.86);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);box-shadow:var(--sh);padding:10px}
+.bb .bh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 2px 8px}
+.bb .bt{font-family:var(--mono);font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:var(--m)}
+.bb .links{display:flex;gap:8px}
+.ic{width:28px;height:28px;border-radius:10px;border:1px solid rgba(255,255,255,.10);background:rgba(10,12,20,.45);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(0,240,255,.08)}
+.bb svg{width:14px;height:14px;opacity:.92}
+.bb .row{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}.bb .row::-webkit-scrollbar{height:0}
+.bb .pr{flex:0 0 auto;width:210px}
 
-    .nav__left a{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:38px; height:38px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,12,20,.55);
-      box-shadow: inset 0 0 0 1px rgba(0,240,255,.10);
-      transition: transform .15s ease, border-color .15s ease;
-    }
-    .nav__left a:active{ transform: scale(.98); }
-    .nav__left a:hover{ border-color: rgba(0,240,255,.30); }
+/* DESKTOP SIDEBAR CARD */
+.sideCard{border-radius:var(--r2);border:1px solid rgba(255,255,255,.10);background:linear-gradient(135deg,rgba(0,240,255,.10),transparent 48%),linear-gradient(225deg,rgba(255,0,168,.10),transparent 52%),rgba(10,12,20,.62);box-shadow:var(--sh);overflow:hidden}
+.sideHd{padding:12px 12px 10px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sideT{margin:0;font-family:var(--mono);font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:var(--m)}
+.sideSoc{display:flex;gap:6px;flex-wrap:wrap}
+.sideSoc .ic{width:24px;height:24px;border-radius:9px}
+.sideSoc svg{width:12px;height:12px}
+.sideList{padding:10px 12px 12px;display:flex;flex-direction:column;gap:10px}
+.sideNote{padding:10px 12px 12px;border-top:1px solid rgba(255,255,255,.08);color:var(--m);font-size:12px;line-height:1.45}
 
-    .nav__icon{ width:18px; height:18px; opacity:.95; }
+/* COOKIE */
+.cb{position:fixed;left:0;right:0;bottom:env(safe-area-inset-bottom);z-index:80;pointer-events:none;transform:translateY(calc(100% + 14px));transition:.22s}
+.cb.on{transform:translateY(0)}
+.cb .in{pointer-events:auto;margin:10px 12px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(8,10,16,.86);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);box-shadow:var(--sh);padding:10px}
+.cb .top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 2px 6px}
+.cb .t{font-family:var(--mono);font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:var(--m);display:flex;align-items:center;gap:8px}
+.cb .t .pill{width:8px;height:8px;border-radius:999px;background:var(--y);box-shadow:0 0 .5px rgba(252,238,9,.9),0 0 22px rgba(252,238,9,.16)}
+.cb .msg{margin:0 2px 8px;color:var(--m);font-size:12px;line-height:1.45}
+.cb .a{color:var(--t);text-decoration:underline;text-underline-offset:2px;opacity:.9}
+.cb .btns{display:flex;gap:8px;flex-wrap:wrap}
+.cb button,.ftr .lk{cursor:pointer;user-select:none;border-radius:999px;padding:8px 10px;border:1px solid rgba(255,255,255,.10);background:rgba(10,12,20,.52);color:var(--t);font-weight:900;font-size:12px;box-shadow:inset 0 0 0 1px rgba(0,240,255,.08);transition:.12s}
+.cb button:active,.ftr .lk:active{transform:scale(.985)}
+.cb .ok{border-color:rgba(252,238,9,.38);background:linear-gradient(135deg,rgba(252,238,9,.14),transparent 60%),rgba(10,12,20,.52);box-shadow:inset 0 0 0 1px rgba(252,238,9,.12),0 0 22px rgba(252,238,9,.10)}
+.cb .no:hover{border-color:rgba(255,0,168,.32)}.cb .det:hover{border-color:rgba(0,240,255,.30)}
+.cb details{margin-top:8px;border-top:1px solid rgba(255,255,255,.08);padding-top:8px}
+.cb summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--m);font-family:var(--mono);font-size:11px;letter-spacing:.8px;text-transform:uppercase}
+.cb summary::-webkit-details-marker{display:none}
+.cb .d{margin:8px 2px 0;color:rgba(233,238,246,.92);font-size:12px;line-height:1.5}
+.cb .grid{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.cb .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:rgba(10,12,20,.52);box-shadow:inset 0 0 0 1px rgba(0,240,255,.10)}
+.cb .k{color:var(--t);font-weight:900;font-size:12px}.cb .s{color:var(--m);font-size:12px}
+.cb .tog{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.cb input[type="checkbox"]{width:16px;height:16px;accent-color:var(--y)}.cb input[disabled]{opacity:.6}
+@media (max-width:420px){.cb .msg{font-size:11.5px}.cb button{padding:8px 9px}}
 
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      padding: 6px 8px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,12,20,.45);
-      box-shadow: inset 0 0 0 1px rgba(255,0,168,.12);
-    }
-    .brand img{
-      width:34px; height:34px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: var(--glow-mag);
-      object-fit:cover;
-    }
-    .brand__text{ display:flex; flex-direction:column; line-height:1.05; }
-    .brand__name{ font-weight:900; font-size:14px; letter-spacing:.2px; }
-    .brand__tagline{
-      font-family:var(--mono);
-      font-size:10px;
-      color:var(--muted);
-      letter-spacing:.6px;
-      text-transform: uppercase;
-    }
+/* FOOTER */
+.ftr{margin-top:18px;padding:18px 12px 120px}
+.ftr .in{max-width:720px;margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(8,10,16,.62);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);box-shadow:var(--sh);padding:12px 12px 10px}
+.ftr .top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ftr .brand{display:flex;align-items:center;gap:10px;min-width:0}
+.ftr .logo{width:28px;height:28px;border-radius:999px;border:1px solid rgba(255,255,255,.14);object-fit:cover;box-shadow:0 0 .5px rgba(255,0,168,.9),0 0 18px rgba(255,0,168,.12)}
+.ftr .links{display:flex;gap:8px;flex-wrap:wrap}
+.ftr .lk:hover{border-color:rgba(0,240,255,.30)}
+.ftr .dot{width:7px;height:7px;border-radius:999px;background:var(--c);box-shadow:0 0 .5px rgba(0,240,255,.9),0 0 18px rgba(0,240,255,.16)}
+.ftr .bot{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ftr .copy{color:var(--m);font-family:var(--mono);font-size:11px}.ftr .note{color:var(--m);font-size:12px}
 
-    .wrap{
-      padding: calc(var(--nav-h) + env(safe-area-inset-top) + 14px) 14px 64px;
-      max-width: 720px;
-      margin: 0 auto;
-    }
+/* DESKTOP */
+@media (min-width:980px){
+  .navin{max-width:1180px;padding:0 18px}
+  .wrap{max-width:1180px;padding:calc(var(--navh,120px) + 18px) 18px 70px}
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+  .sideCol{display:block}
+  .bb{display:none}
+  .hero .h1{font-size:26px}
+  .media img{height:280px}
+  .ftr .in{max-width:1180px}
+}
+@media (prefers-reduced-motion:reduce){.evo{scroll-snap-type:x mandatory}}
+</style></head><body>
+<div class="scan" aria-hidden="true"></div>
 
-    .hero{
-      border-radius: var(--radius2);
-      padding: 14px;
-      background:
-        linear-gradient(135deg, rgba(0,240,255,.16), transparent 40%),
-        linear-gradient(225deg, rgba(255,0,168,.14), transparent 45%),
-        rgba(10, 12, 18, .62);
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(900px 140px at 25% 0%, rgba(252,238,9,.18), transparent 60%),
-        radial-gradient(700px 160px at 90% 0%, rgba(0,240,255,.16), transparent 65%),
-        radial-gradient(800px 220px at 60% 120%, rgba(255,0,168,.10), transparent 60%);
-      opacity:.85;
-      pointer-events:none;
-    }
-    .hero__inner{ position:relative; }
-    .hero__kicker{
-      display:flex; align-items:center; gap:10px;
-      font-family:var(--mono);
-      font-size:11px;
-      letter-spacing:.9px;
-      text-transform: uppercase;
-      color:var(--muted);
-    }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: var(--cyan);
-      box-shadow: var(--glow-cyan);
-    }
-    .hero__title{
-      margin:10px 0 0;
-      font-size:20px;
-      line-height:1.15;
-      font-weight:950;
-      letter-spacing:.2px;
-    }
-    .hero__title span{
-      color: var(--yellow);
-      text-shadow: 0 0 18px rgba(252,238,9,.18);
-    }
-    .hero__sub{
-      margin:10px 0 0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
-    }
+<header class="nav" id="nav"><div class="navin">
+  <img class="logo" src="https://images.unsplash.com/photo-1520975661595-6453be3f7070?auto=format&fit=crop&w=128&h=128&q=70" alt="Logo">
+  <input id="q" class="q" type="search" placeholder="Cerca…" autocomplete="off" spellcheck="false" aria-label="Cerca nei titoli">
+  <nav class="nav__cats" aria-label="Categorie"><div class="cat" id="catbar">
+    <button class="chip" type="button" data-filter="all" aria-selected="true">Tutto</button>
+    <button class="chip" type="button" data-filter="geopolitica" aria-selected="false">Geopolitica</button>
+    <button class="chip" type="button" data-filter="business" aria-selected="false">Business</button>
+    <button class="chip" type="button" data-filter="tecnologia" aria-selected="false">Tecnologia</button>
+  </div></nav>
+</div></header>
 
-    /* categories */
-    .catbar{
-      margin-top: 12px;
-      display:flex;
-      gap:10px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 8px 2px 10px;
-      scroll-snap-type:x mandatory;
-    }
-    .catbar::-webkit-scrollbar{ height:0; }
+<main class="wrap">
+  <section class="hero" aria-label="Intro">
+    <div class="k"><span class="dot" aria-hidden="true"></span> Intelligence sintetica, lettura fredda dei segnali</div>
+    <h1 class="h1">Analisi <span>geopolitica</span>, <span>business</span> e <span>tecnologia</span> in tempo reale</h1>
+    <p class="sub">Cerca per titolo + filtra per categoria. Tap su “Prossime analisi” per andare all’articolo.</p>
+  </section>
 
-    .chip{
-      scroll-snap-align:start;
-      flex:0 0 auto;
-      border-radius: 999px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(10,12,20,.52);
-      color: var(--text);
-      font-weight: 800;
-      font-size: 12px;
-      letter-spacing:.2px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow: inset 0 0 0 1px rgba(0,240,255,.10);
-      transition: border-color .15s ease, transform .15s ease, background .15s ease;
-      user-select:none;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .chip:active{ transform: scale(.98); }
-    .chip[aria-selected="true"]{
-      border-color: rgba(252,238,9,.42);
-      background:
-        linear-gradient(135deg, rgba(252,238,9,.18), rgba(0,0,0,0)),
-        rgba(10,12,20,.58);
-      box-shadow: inset 0 0 0 1px rgba(252,238,9,.14), var(--glow-yellow);
-    }
-    .chip__badge{
-      font-family:var(--mono);
-      font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.12);
-      color: var(--muted);
-      background: rgba(0,0,0,.22);
-    }
+  <section class="sec" aria-label="Scenari in evoluzione">
+    <div class="head"><h2 class="tt">Scenari in evoluzione</h2></div>
+    <div class="evoShell"><div class="evo" id="evo" aria-label="Scenari (auto-scroll)">
+      <div class="card"><div class="top"><div class="tag"><span class="pill" aria-hidden="true"></span> geopolitica</div><div class="dt">18 Gen</div></div><p class="txt">Nuove linee rosse nel dominio marittimo: rischio escalation “a bassa firma” e shock su supply chain.</p></div>
+      <div class="card"><div class="top"><div class="tag"><span class="pill" aria-hidden="true"></span> business</div><div class="dt">18 Gen</div></div><p class="txt">Compressione margini e repricing del rischio: riallineamento tra capex, energia e costo del capitale.</p></div>
+      <div class="card"><div class="top"><div class="tag"><span class="pill" aria-hidden="true"></span> tecnologia</div><div class="dt">18 Gen</div></div><p class="txt">Nuovo ciclo AI: più inferenza on-device, più vincoli di energia e sicurezza, meno tolleranza all’errore.</p></div>
+    </div></div>
+  </section>
 
-    /* scenarios */
-    .section{ margin-top: 14px; }
-    .section__head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-    }
-    .section__title{
-      margin:0;
-      font-size: 13px;
-      letter-spacing:.9px;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-family: var(--mono);
-    }
-    .section__hint{
-      margin:0;
-      font-size: 12px;
-      color: var(--faint);
-      font-family: var(--mono);
-    }
+  <div class="layout">
+    <div class="mainCol">
+      <section class="sec" aria-label="Feed articoli">
+        <div class="head"><h2 class="tt">Feed articoli</h2></div>
+        <div class="empty" id="emptyState"><strong>Nessun articolo</strong> con questi filtri.</div>
 
-    .evo{
-      display:flex;
-      gap:12px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      padding-bottom:6px;
-      scroll-snap-type:x mandatory;
-    }
-    .evo::-webkit-scrollbar{ height:0; }
+        <div class="feed" id="feed">
+          <article class="post" id="np-001" data-category="geopolitica" aria-label="Articolo geopolitica (immagine)">
+            <div class="meta"><div class="ml"><div class="ptag"><span class="pill" aria-hidden="true"></span> geopolitica</div><div class="pdate">18 Gen 2026</div></div><div class="pdate">S1</div></div>
+            <div class="body">
+              <h3 class="h3">Stretto critico e deterrenza: quando la “zona grigia” diventa costo economico</h3>
+              <p class="st">Frizioni a bassa intensità possono alzare premi assicurativi e ridisegnare rotte, scorte e tempi di consegna.</p>
+              <div class="media"><img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1400&q=70" alt="Rotte marittime notturne con luci al neon" loading="lazy"></div>
+              <div class="hl"><p class="hk">In evidenza</p><p class="ht">Il punto non è l’evento singolo, ma la baseline di rischio: più deviazioni, più buffer, più costo per unità consegnata.</p></div>
+              <div class="ct"><p>La dinamica “zona grigia” sposta il baricentro verso i costi di frizione: assicurazioni, sicurezza, ritardi e volatilità dei noli.</p><p>Variabili chiave: lead time, multi-sourcing, scorte strategiche e clausole indicizzate.</p></div>
+              <div class="ft"><div class="srcs" aria-label="Fonti">
+                <a class="src" href="#" target="_blank" rel="noreferrer"><span class="sdot" aria-hidden="true"></span> Fonte 1</a>
+                <a class="src" href="#" target="_blank" rel="noreferrer"><span class="sdot" aria-hidden="true"></span> Fonte 2</a>
+                <a class="src" href="#" target="_blank" rel="noreferrer"><span class="sdot" aria-hidden="true"></span> Fonte 3</a>
+              </div><div class="auth"><div>Autore: <strong>Redazione NightPulse</strong></div><div>ID: NP-001</div></div></div>
+            </div>
+          </article>
 
-    .evoCard{
-      scroll-snap-align:start;
-      flex: 0 0 82%;
-      min-height: 92px;
-      border-radius: var(--radius);
-      padding: 12px 12px 10px;
-      background:
-        linear-gradient(145deg, rgba(0,240,255,.14), transparent 52%),
-        rgba(10,12,20,.62);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .evoCard:after{
-      content:"";
-      position:absolute;
-      inset:auto -40px 10px auto;
-      width:120px; height:120px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,0,168,.22), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .evoCard__top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-      position:relative;
-    }
-
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing:.8px;
-      text-transform: uppercase;
-      padding: 6px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.20);
-      color: var(--text);
-      box-shadow: inset 0 0 0 1px rgba(0,240,255,.10);
-      white-space:nowrap;
-    }
-    .tag .pill{
-      width:8px; height:8px;
-      border-radius:999px;
-      background: var(--cyan);
-      box-shadow: var(--glow-cyan);
-    }
-    .date{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      white-space:nowrap;
-    }
-    .evoCard__text{
-      margin:0;
-      position:relative;
-      color: var(--text);
-      font-size: 13px;
-      line-height:1.35;
-      font-weight: 900;
-      letter-spacing:.1px;
-    }
-
-    /* feed articles */
-    .feed{
-      margin-top: 14px;
-      display:flex;
-      flex-direction:column;
-      gap: 14px;
-    }
-
-    article.post{
-      border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(135deg, rgba(255,0,168,.10), transparent 42%),
-        linear-gradient(225deg, rgba(0,240,255,.10), transparent 50%),
-        rgba(10,12,20,.62);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .post__meta{
-      padding: 14px 14px 10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      background: rgba(0,0,0,.12);
-    }
-    .post__metaLeft{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:0;
-    }
-    .post__tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: .9px;
-      text-transform: uppercase;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.20);
-      box-shadow: inset 0 0 0 1px rgba(252,238,9,.10);
-      white-space:nowrap;
-    }
-    .post__tag .pill{
-      background: var(--yellow);
-      box-shadow: var(--glow-yellow);
-      width:8px; height:8px; border-radius:999px;
-    }
-    .post__date{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      white-space:nowrap;
-    }
-
-    .post__body{ padding:14px; }
-    .post__title{
-      margin:0;
-      font-size:18px;
-      line-height:1.15;
-      font-weight: 950;
-      letter-spacing:.2px;
-    }
-    .post__subtitle{
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height:1.45;
-    }
-
-    .media{
-      margin-top:12px;
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.25);
-      box-shadow: inset 0 0 0 1px rgba(0,240,255,.10);
-    }
-    .media img{
-      width:100%;
-      height:220px;
-      object-fit: cover;
-      display:block;
-      filter: saturate(1.05) contrast(1.05);
-    }
-    .yt{
-      position:relative;
-      width:100%;
-      padding-top:56.25%;
-      background:#000;
-    }
-    .yt iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
-
-    .highlight{
-      margin-top:12px;
-      border-radius:18px;
-      padding: 12px;
-      background:
-        linear-gradient(135deg, rgba(252,238,9,.14), rgba(255,0,168,.10)),
-        rgba(10,12,20,.64);
-      border: 1px solid rgba(252,238,9,.22);
-      box-shadow: inset 0 0 0 1px rgba(0,240,255,.10);
-    }
-    .highlight__k{
-      font-family: var(--mono);
-      font-size:10px;
-      letter-spacing:.9px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin:0 0 6px;
-    }
-    .highlight__t{
-      margin:0;
-      font-size:13px;
-      line-height:1.45;
-      font-weight: 900;
-    }
-
-    .post__content{
-      margin-top:12px;
-      font-size:13px;
-      line-height:1.6;
-      color: rgba(233,238,246,.92);
-    }
-    .post__content p{ margin: 0 0 10px; }
-    .post__content p:last-child{ margin-bottom: 0; }
-
-    .post__footer{
-      margin-top:12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      padding-top:12px;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-    .sources{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .source{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      font-weight: 900;
-      font-size: 12px;
-      transition: border-color .15s ease, transform .15s ease;
-    }
-    .source:hover{ border-color: rgba(0,240,255,.34); }
-    .source:active{ transform: scale(.98); }
-    .source .s-dot{
-      width:7px; height:7px; border-radius:999px;
-      background: var(--cyan);
-      box-shadow: var(--glow-cyan);
-    }
-    .author{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing:.3px;
-    }
-    .author strong{
-      color: var(--text);
-      font-family: var(--font);
-      font-weight: 950;
-    }
-
-    /* infinite hint (no clone) */
-    .loader{
-      margin: 14px 0 0;
-      border-radius: 18px;
-      border: 1px dashed rgba(0,240,255,.30);
-      background: rgba(0,240,255,.06);
-      padding: 12px;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      display:none;
-    }
-    .loader.is-on{ display:block; }
-
-    .empty{
-      display:none;
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,0,168,.28);
-      background: rgba(255,0,168,.08);
-      color: var(--muted);
-    }
-    .empty strong{ color: var(--text); }
-
-    .scanline{
-      position:fixed;
-      pointer-events:none;
-      inset:0;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,.03),
-        rgba(255,255,255,.03) 1px,
-        rgba(0,0,0,0) 2px,
-        rgba(0,0,0,0) 6px
-      );
-      mix-blend-mode: overlay;
-      opacity:.06;
-      z-index:2;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="scanline" aria-hidden="true"></div>
-
-  <header class="nav" id="nav">
-    <div class="nav__left" aria-label="Social links">
-      <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X">
-        <svg class="nav__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 4l7.6 9.4L4.6 20H7l5.2-4.8L16 20h4l-7.9-9.7L19.2 4H16.9l-4.7 4.4L8 4H4z" fill="currentColor" opacity=".95"/>
-        </svg>
-      </a>
-      <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube">
-        <svg class="nav__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M21 8.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C14.6 4.6 12 4.6 12 4.6h0s-2.6 0-5.7.3c-.5.1-1.5.1-2.4 1C3.2 6.6 3 8.2 3 8.2S2.7 10 2.7 11.8v.4C2.7 14 3 15.8 3 15.8s.2 1.6.9 2.3c.9.9 2.1.9 2.6 1 1.9.2 5.5.3 5.5.3s2.6 0 5.7-.3c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.3-1.8.3-3.6v-.4C21.3 10 21 8.2 21 8.2z" fill="currentColor" opacity=".95"/>
-          <path d="M10.3 9.2v5.6l5-2.8-5-2.8z" fill="#07080b"/>
-        </svg>
-      </a>
-      <a href="https://patreon.com" target="_blank" rel="noreferrer" aria-label="Patreon">
-        <svg class="nav__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M14.7 3.2c-3.8 0-6.9 3.1-6.9 6.9 0 3.8 3.1 6.9 6.9 6.9 3.8 0 6.9-3.1 6.9-6.9 0-3.8-3.1-6.9-6.9-6.9z" fill="currentColor" opacity=".95"/>
-          <path d="M4 21V3h3v18H4z" fill="currentColor" opacity=".95"/>
-        </svg>
-      </a>
-    </div>
-
-    <div class="nav__right">
-      <a class="brand" href="#" aria-label="Home">
-        <img src="https://images.unsplash.com/photo-1520975661595-6453be3f7070?auto=format&fit=crop&w=128&h=128&q=70" alt="Logo" />
-        <div class="brand__text">
-          <div class="brand__name">DarkFeed</div>
-          <div class="brand__tagline">Geo • Biz • Tech</div>
+          <article class="post" id="np-002" data-category="tecnologia" aria-label="Articolo tecnologia (player YouTube)">
+            <div class="meta"><div class="ml"><div class="ptag"><span class="pill" aria-hidden="true"></span> tecnologia</div><div class="pdate">18 Gen 2026</div></div><div class="pdate">S2</div></div>
+            <div class="body">
+              <h3 class="h3">AI operativa: perché l’inferenza “vicino al dato” cambia sicurezza e margini</h3>
+              <p class="st">Dal cloud al device: meno latenza, più controllo, ma nuove superfici d’attacco e vincoli di energia.</p>
+              <div class="media"><div class="yt"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div></div>
+              <div class="hl"><p class="hk">In evidenza</p><p class="ht">Quando l’AI entra nei flussi core, l’errore diventa costo diretto: serve osservabilità e piani di fallback.</p></div>
+              <div class="ct"><p>L’inferenza distribuita abilita use case real-time ma sposta il rischio verso device eterogenei, update complessi e protezione del modello.</p><p>Impatto: capex edge e costi di compliance/sicurezza che incidono sul gross margin.</p></div>
+              <div class="ft"><div class="srcs" aria-label="Fonti">
+                <a class="src" href="#" target="_blank" rel="noreferrer"><span class="sdot" aria-hidden="true"></span> Fonte 1</a>
+                <a class="src" href="#" target="_blank" rel="noreferrer"><span class="sdot" aria-hidden="true"></span> Fonte 2</a>
+              </div><div class="auth"><div>Autore: <strong>Desk Tech</strong></div><div>ID: NP-002</div></div></div>
+            </div>
+          </article>
         </div>
-      </a>
+
+        <div class="loader" id="loader" aria-live="polite">Fine feed: duplica un &lt;article class="post"&gt; nel body per aggiungere nuovi contenuti.</div>
+      </section>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero" aria-label="Intro">
-      <div class="hero__inner">
-        <div class="hero__kicker"><span class="dot" aria-hidden="true"></span> Intelligence sintetica, lettura fredda dei segnali</div>
-        <h1 class="hero__title">Analisi <span>geopolitica</span>, <span>business</span> e <span>tecnologia</span> in tempo reale</h1>
-        <p class="hero__sub">Filtro per categorie e feed “infinito” senza duplicazioni automatiche: quando arrivi in fondo, compare un hint e aggiungi tu nuovi &lt;article&gt; duplicandoli nel body.</p>
+    <aside class="sideCol" aria-label="Analisi in evidenza (desktop)">
+      <div class="sideSticky">
+        <div class="sideCard">
+          <div class="sideHd">
+            <h3 class="sideT">Analisi in evidenza</h3>
+            <div class="sideSoc" aria-label="Social links">
+              <a class="ic" href="https://x.com" target="_blank" rel="noreferrer" aria-label="X"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4l7.6 9.4L4.6 20H7l5.2-4.8L16 20h4l-7.9-9.7L19.2 4H16.9l-4.7 4.4L8 4H4z" fill="currentColor" opacity=".95"/></svg></a>
+              <a class="ic" href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none"><path d="M21 8.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C14.6 4.6 12 4.6 12 4.6h0s-2.6 0-5.7.3c-.5.1-1.5.1-2.4 1C3.2 6.6 3 8.2 3 8.2S2.7 10 2.7 11.8v.4C2.7 14 3 15.8 3 15.8s.2 1.6.9 2.3c.9.9 2.1.9 2.6 1 1.9.2 5.5.3 5.5.3s2.6 0 5.7-.3c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.3-1.8.3-3.6v-.4C21.3 10 21 8.2 21 8.2z" fill="currentColor" opacity=".95"/><path d="M10.3 9.2v5.6l5-2.8-5-2.8z" fill="#07080b"/></svg></a>
+              <a class="ic" href="https://patreon.com" target="_blank" rel="noreferrer" aria-label="Patreon"><svg viewBox="0 0 24 24" fill="none"><path d="M14.7 3.2c-3.8 0-6.9 3.1-6.9 6.9 0 3.8 3.1 6.9 6.9 6.9 3.8 0 6.9-3.1 6.9-6.9 0-3.8-3.1-6.9-6.9-6.9z" fill="currentColor" opacity=".95"/><path d="M4 21V3h3v18H4z" fill="currentColor" opacity=".95"/></svg></a>
+            </div>
+          </div>
+
+          <div class="sideList" aria-label="Anteprime">
+            <a class="pr" href="#np-001" aria-label="Vai a NP-001"><img class="th" src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=160&h=160&q=70" alt="Thumb" loading="lazy"><div class="pm"><div class="pk">Geopolitica</div><div class="pt">Stretto critico e deterrenza</div></div></a>
+            <a class="pr" href="#np-002" aria-label="Vai a NP-002"><img class="th" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=160&h=160&q=70" alt="Thumb" loading="lazy"><div class="pm"><div class="pk">Tecnologia</div><div class="pt">AI operativa: inferenza vicino al dato</div></div></a>
+          </div>
+
+          <div class="sideNote">Scorri il feed e usa le anteprime per saltare ai punti chiave.</div>
+        </div>
       </div>
-    </section>
+    </aside>
+  </div>
+</main>
 
-    <nav class="catbar" id="catbar" aria-label="Categorie">
-      <button class="chip" type="button" data-filter="all" aria-selected="true">
-        Tutto <span class="chip__badge" id="countAll">—</span>
-      </button>
-      <button class="chip" type="button" data-filter="geopolitica" aria-selected="false">
-        Geopolitica <span class="chip__badge" id="countGeo">—</span>
-      </button>
-      <button class="chip" type="button" data-filter="business" aria-selected="false">
-        Business <span class="chip__badge" id="countBiz">—</span>
-      </button>
-      <button class="chip" type="button" data-filter="tecnologia" aria-selected="false">
-        Tecnologia <span class="chip__badge" id="countTech">—</span>
-      </button>
+<footer class="ftr" aria-label="Footer"><div class="in">
+  <div class="top">
+    <div class="brand"><img class="logo" src="https://images.unsplash.com/photo-1520975661595-6453be3f7070?auto=format&fit=crop&w=128&h=128&q=70" alt="Logo"></div>
+    <nav class="links" aria-label="Link legali e utili">
+      <a class="lk" href="/privacy-policy/"><span class="dot" aria-hidden="true"></span> Privacy</a>
+      <a class="lk" href="/cookie-policy/"><span class="dot" aria-hidden="true"></span> Cookie</a>
+      <button class="lk" type="button" id="manageCookies"><span class="dot" aria-hidden="true"></span> Gestisci cookie</button>
     </nav>
+  </div>
+  <div class="bot"><div class="copy">© <span id="y"></span> Darkfeed. Tutti i diritti riservati.</div><div class="note">Dati e analisi a scopo informativo.</div></div>
+</div></footer>
 
-    <section class="section" aria-label="Scenari in evoluzione">
-      <div class="section__head">
-        <h2 class="section__title">Scenari in evoluzione</h2>
-      </div>
+<!-- MOBILE bottom bar (solo mobile) -->
+<aside class="bb" id="bb" aria-label="Analisi in evidenza (mobile)"><div class="in">
+  <div class="bh">
+    <div class="bt">Analisi in evidenza</div>
+    <div class="links" aria-label="Social links">
+      <a class="ic" href="https://x.com" target="_blank" rel="noreferrer" aria-label="X"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4l7.6 9.4L4.6 20H7l5.2-4.8L16 20h4l-7.9-9.7L19.2 4H16.9l-4.7 4.4L8 4H4z" fill="currentColor" opacity=".95"/></svg></a>
+      <a class="ic" href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none"><path d="M21 8.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C14.6 4.6 12 4.6 12 4.6h0s-2.6 0-5.7.3c-.5.1-1.5.1-2.4 1C3.2 6.6 3 8.2 3 8.2S2.7 10 2.7 11.8v.4C2.7 14 3 15.8 3 15.8s.2 1.6.9 2.3c.9.9 2.1.9 2.6 1 1.9.2 5.5.3 5.5.3s2.6 0 5.7-.3c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.3-1.8.3-3.6v-.4C21.3 10 21 8.2 21 8.2z" fill="currentColor" opacity=".95"/><path d="M10.3 9.2v5.6l5-2.8-5-2.8z" fill="#07080b"/></svg></a>
+      <a class="ic" href="https://patreon.com" target="_blank" rel="noreferrer" aria-label="Patreon"><svg viewBox="0 0 24 24" fill="none"><path d="M14.7 3.2c-3.8 0-6.9 3.1-6.9 6.9 0 3.8 3.1 6.9 6.9 6.9 3.8 0 6.9-3.1 6.9-6.9 0-3.8-3.1-6.9-6.9-6.9z" fill="currentColor" opacity=".95"/><path d="M4 21V3h3v18H4z" fill="currentColor" opacity=".95"/></svg></a>
+    </div>
+  </div>
+  <div class="row" aria-label="Anteprime">
+    <a class="pr" href="#np-001" aria-label="Vai a NP-001"><img class="th" src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=160&h=160&q=70" alt="Thumb" loading="lazy"><div class="pm"><div class="pk">Geopolitica</div><div class="pt">Stretto critico e deterrenza</div></div></a>
+    <a class="pr" href="#np-002" aria-label="Vai a NP-002"><img class="th" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=160&h=160&q=70" alt="Thumb" loading="lazy"><div class="pm"><div class="pk">Tecnologia</div><div class="pt">AI operativa: inferenza vicino al dato</div></div></a>
+  </div>
+</div></aside>
 
-      <div class="evo">
-        <div class="evoCard" role="article" aria-label="Scenario 1">
-          <div class="evoCard__top">
-            <div class="tag"><span class="pill" aria-hidden="true"></span> geopolitica</div>
-            <div class="date">18 Gen</div>
-          </div>
-          <p class="evoCard__text">Nuove linee rosse nel dominio marittimo: rischio escalation “a bassa firma” e shock su supply chain.</p>
-        </div>
+<aside class="cb" id="cookieBanner" aria-label="Preferenze cookie"><div class="in">
+  <div class="top"><div class="t"><span class="pill" aria-hidden="true"></span> cookie</div>
+    <button class="det" type="button" id="cbDetailsBtn" aria-controls="cbDetails" aria-expanded="false">Dettagli</button>
+  </div>
+  <p class="msg">Usiamo cookie tecnici e, con consenso, analytics e marketing. <a class="a" href="/cookie-policy/" rel="nofollow">Cookie policy</a></p>
+  <div class="btns">
+    <button class="ok" type="button" id="cbAcceptAll">Accetta</button>
+    <button class="no" type="button" id="cbRejectAll">Rifiuta</button>
+    <button type="button" id="cbSave">Salva</button>
+  </div>
+  <details id="cbDetails" hidden><summary>Preferenze <span aria-hidden="true">▾</span></summary>
+    <div class="d">Seleziona quali categorie autorizzare. I cookie tecnici sono sempre attivi.</div>
+    <div class="grid" role="group" aria-label="Categorie cookie">
+      <div class="row"><div><div class="k">Tecnici</div><div class="s">Necessari per funzionamento</div></div><div class="tog"><input type="checkbox" checked disabled aria-label="Tecnici sempre attivi"></div></div>
+      <div class="row"><div><div class="k">Analytics</div><div class="s">Misurazione visite (aggregata)</div></div><div class="tog"><input type="checkbox" id="cbAnalytics" aria-label="Abilita analytics"></div></div>
+      <div class="row"><div><div class="k">Marketing</div><div class="s">Personalizzazione e advertising</div></div><div class="tog"><input type="checkbox" id="cbMarketing" aria-label="Abilita marketing"></div></div>
+    </div>
+  </details>
+</div></aside>
 
-        <div class="evoCard" role="article" aria-label="Scenario 2">
-          <div class="evoCard__top">
-            <div class="tag"><span class="pill" aria-hidden="true"></span> business</div>
-            <div class="date">18 Gen</div>
-          </div>
-          <p class="evoCard__text">Compressione margini e repricing del rischio: riallineamento tra capex, energia e costo del capitale.</p>
-        </div>
+<script>
+(()=>{const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const nav=$("#nav"),evo=$("#evo"),feed=$("#feed"),empty=$("#emptyState"),q=$("#q"),chips=$$(".chip"),bb=$("#bb");
+let y=scrollY,bbY=scrollY,navTick=0,bbTick=0,shown=0,term="",cat="all";
 
-        <div class="evoCard" role="article" aria-label="Scenario 3">
-          <div class="evoCard__top">
-            <div class="tag"><span class="pill" aria-hidden="true"></span> tecnologia</div>
-            <div class="date">18 Gen</div>
-          </div>
-          <p class="evoCard__text">Nuovo ciclo AI: più inferenza on-device, più vincoli di energia e sicurezza, meno tolleranza all’errore.</p>
-        </div>
-      </div>
-    </section>
+const setNavH=()=>document.documentElement.style.setProperty("--navh",nav.getBoundingClientRect().height+"px");
+addEventListener("resize",setNavH,{passive:!0});setNavH();
 
-    <section class="section" aria-label="Feed articoli">
-      <div class="section__head">
-        <h2 class="section__title">Feed articoli</h2>
-        
-      </div>
+addEventListener("scroll",()=>{if(navTick)return;navTick=requestAnimationFrame(()=>{const n=scrollY,d=n-y;if(Math.abs(d)>6){d>0&&n>90?nav.classList.add("nav--hidden"):nav.classList.remove("nav--hidden");y=n}navTick=0})},{passive:!0});
 
-      <div class="empty" id="emptyState">
-        <strong>Nessun articolo</strong> per questo filtro. Seleziona “Tutto” o un’altra categoria.
-      </div>
+addEventListener("scroll",()=>{if(matchMedia("(min-width:980px)").matches||!bb)return;if(bbTick)return;bbTick=requestAnimationFrame(()=>{const n=scrollY,d=n-bbY;if(Math.abs(d)>6){d>0&&n>120?bb.classList.add("on"):bb.classList.remove("on");bbY=n}bbTick=0})},{passive:!0});
 
-      <div class="feed" id="feed">
-        <!-- ARTICOLO 1 (immagine) -->
-        <article class="post" data-category="geopolitica" aria-label="Articolo geopolitica (immagine)">
-          <div class="post__meta">
-            <div class="post__metaLeft">
-              <div class="post__tag"><span class="pill" aria-hidden="true"></span> geopolitica</div>
-              <div class="post__date">18 Gen 2026</div>
-            </div>
-            <div class="post__date">S1</div>
-          </div>
+const norm=s=>(s||"").toLowerCase().trim().replace(/\s+/g," "),titleOf=p=>p.querySelector("h3")?.textContent||"",posts=()=>[...feed.querySelectorAll(".post")];
+const apply=()=>{chips.forEach(b=>b.setAttribute("aria-selected",b.dataset.filter===cat));let v=0;posts().forEach(p=>{const ok=(cat==="all"||(p.dataset.category||"").toLowerCase()===cat)&&(!term||norm(titleOf(p)).includes(term));p.style.display=ok?"":"none";v+=ok});empty.style.display=v?"none":"block"};
+$("#catbar").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b){cat=b.dataset.filter;apply()}});
+q.addEventListener("input",()=>{term=norm(q.value);apply()},{passive:!0});
 
-          <div class="post__body">
-            <h3 class="post__title">Stretto critico e deterrenza: quando la “zona grigia” diventa costo economico</h3>
-            <p class="post__subtitle">Frizioni a bassa intensità possono alzare premi assicurativi e ridisegnare rotte, scorte e tempi di consegna.</p>
+addEventListener("scroll",()=>{if(shown)return;if(scrollY+innerHeight>=document.body.scrollHeight-900){$("#loader")?.classList.add("on");shown=1}},{passive:!0});
 
-            <div class="media" aria-label="Immagine di copertina">
-              <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1400&q=70" alt="Rotte marittime notturne con luci al neon" />
-            </div>
+addEventListener("click",e=>{const a=e.target.closest("a.pr");if(!a)return;const h=a.getAttribute("href")||"";if(!h.startsWith("#"))return;const el=document.getElementById(h.slice(1));if(!el)return;e.preventDefault();if(getComputedStyle(el).display==="none"){cat="all";term="";q.value="";apply()}el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),900)});
 
-            <div class="highlight" aria-label="Highlight">
-              <p class="highlight__k">In evidenza</p>
-              <p class="highlight__t">Il punto non è l’evento singolo, ma la baseline di rischio: più deviazioni, più buffer, più costo per unità consegnata.</p>
-            </div>
+const reduce=matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;let raf=0,paused=0,timer=0,auto=0;
+const max=()=>Math.max(0,evo.scrollWidth-evo.clientWidth);
+const tick=()=>{if(!evo||paused||!auto||reduce){raf=0;return}const m=max();if(m<=0){raf=0;return}evo.scrollLeft+=.55;if(evo.scrollLeft>=m-1)evo.scrollLeft=0;raf=requestAnimationFrame(tick)};
+const start=()=>{if(reduce||!evo)return;auto=1;paused=0;if(!raf)raf=requestAnimationFrame(tick)},stop=()=>{paused=1;if(raf)cancelAnimationFrame(raf),raf=0},pause=()=>{stop();clearTimeout(timer);timer=setTimeout(start,1200)};
+["pointerdown","touchstart","wheel"].forEach(ev=>evo&&evo.addEventListener(ev,pause,{passive:!0}));
+new IntersectionObserver(es=>{(es[0]&&es[0].isIntersecting)?start():stop()},{threshold:.25}).observe(evo);
+apply();start();
 
-            <div class="post__content">
-              <p>La dinamica “zona grigia” tende a spostare il baricentro verso i costi di frizione: assicurazioni, sicurezza, ritardi e volatilità dei noli.</p>
-              <p>Per le aziende, la variabile chiave diventa il tempo (lead time) e la resilienza: multi-sourcing, scorte strategiche e clausole di indicizzazione.</p>
-            </div>
+$("#y")&&(($("#y").textContent=new Date().getFullYear()));
 
-            <div class="post__footer">
-              <div class="sources" aria-label="Fonti">
-                <a class="source" href="#" target="_blank" rel="noreferrer"><span class="s-dot" aria-hidden="true"></span> Fonte 1</a>
-                <a class="source" href="#" target="_blank" rel="noreferrer"><span class="s-dot" aria-hidden="true"></span> Fonte 2</a>
-                <a class="source" href="#" target="_blank" rel="noreferrer"><span class="s-dot" aria-hidden="true"></span> Fonte 3</a>
-              </div>
-              <div class="author">
-                <div>Autore: <strong>Redazione NightPulse</strong></div>
-                <div>ID: NP-001</div>
-              </div>
-            </div>
-          </div>
-        </article>
+(()=>{const KEY="df_cookie_consent_v1",banner=$("#cookieBanner");if(!banner)return;
+const dBtn=$("#cbDetailsBtn"),det=$("#cbDetails"),A=$("#cbAcceptAll"),R=$("#cbRejectAll"),S=$("#cbSave"),an=$("#cbAnalytics"),mk=$("#cbMarketing");
+const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"null")}catch{return null}},write=v=>localStorage.setItem(KEY,JSON.stringify({...v,ts:Date.now()}));
+const show=()=>requestAnimationFrame(()=>banner.classList.add("on")),hide=()=>banner.classList.remove("on"),ui=v=>(an.checked=!!v.analytics,mk.checked=!!v.marketing);
+const g=v=>{if(typeof window.gtag!=="function")return;gtag("consent","update",{analytics_storage:v.analytics?"granted":"denied",ad_storage:v.marketing?"granted":"denied",ad_user_data:v.marketing?"granted":"denied",ad_personalization:v.marketing?"granted":"denied"})};
+const set=v=>{write(v);g(v);hide()},tog=()=>{const open=!det.hasAttribute("hidden");open?(det.setAttribute("hidden",""),dBtn.setAttribute("aria-expanded","false")):(det.removeAttribute("hidden"),dBtn.setAttribute("aria-expanded","true"),det.open=!0)};
+dBtn.addEventListener("click",tog);
+A.addEventListener("click",()=>set({analytics:!0,marketing:!0}));
+R.addEventListener("click",()=>set({analytics:!1,marketing:!1}));
+S.addEventListener("click",()=>set({analytics:!!an.checked,marketing:!!mk.checked}));
+const ex=read();if(ex&&typeof ex.analytics=="boolean"&&typeof ex.marketing=="boolean"){ui(ex);g(ex)}else{ui({analytics:!1,marketing:!1});show()}
+window.DFConsent={get:()=>read(),open:()=>{banner.classList.contains("on")||show();det.hasAttribute("hidden")&&tog()},reset:()=>{localStorage.removeItem(KEY);show()}};
+})();
+$("#manageCookies")?.addEventListener("click",()=>window.DFConsent?.open?.());
+})();
+</script>
+</body></html>
 
-        <!-- ARTICOLO 2 (player YouTube) -->
-        <article class="post" data-category="tecnologia" aria-label="Articolo tecnologia (player YouTube)">
-          <div class="post__meta">
-            <div class="post__metaLeft">
-              <div class="post__tag"><span class="pill" aria-hidden="true"></span> tecnologia</div>
-              <div class="post__date">18 Gen 2026</div>
-            </div>
-            <div class="post__date">S2</div>
-          </div>
-
-          <div class="post__body">
-            <h3 class="post__title">AI operativa: perché l’inferenza “vicino al dato” cambia sicurezza e margini</h3>
-            <p class="post__subtitle">Dal cloud al device: meno latenza, più controllo, ma nuove superfici d’attacco e vincoli di energia.</p>
-
-            <div class="media" aria-label="Player YouTube">
-              <div class="yt">
-                <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-                  loading="lazy"></iframe>
-              </div>
-            </div>
-
-            <div class="highlight" aria-label="Highlight">
-              <p class="highlight__k">In evidenza</p>
-              <p class="highlight__t">Quando l’AI entra nei flussi core, l’errore diventa costo diretto: serve osservabilità e piani di fallback.</p>
-            </div>
-
-            <div class="post__content">
-              <p>L’inferenza distribuita abilita use case real-time ma sposta il rischio verso device eterogenei, aggiornamenti complessi e protezione del modello.</p>
-              <p>Impatto business: capex edge, differenziazione di prodotto e costi di compliance/sicurezza che incidono sul gross margin.</p>
-            </div>
-
-            <div class="post__footer">
-              <div class="sources" aria-label="Fonti">
-                <a class="source" href="#" target="_blank" rel="noreferrer"><span class="s-dot" aria-hidden="true"></span> Fonte 1</a>
-                <a class="source" href="#" target="_blank" rel="noreferrer"><span class="s-dot" aria-hidden="true"></span> Fonte 2</a>
-              </div>
-              <div class="author">
-                <div>Autore: <strong>Desk Tech</strong></div>
-                <div>ID: NP-002</div>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="loader" id="loader" aria-live="polite">
-        Fine feed: duplica un &lt;article class="post"&gt; nel body per aggiungere nuovi contenuti.
-      </div>
-    </section>
-  </main>
-
-  <script>
-    (function(){
-      // NAV hide down / show up
-      const nav = document.getElementById('nav');
-      let lastY = window.scrollY;
-      let ticking = false;
-
-      function onScroll(){
-        const y = window.scrollY;
-        const delta = y - lastY;
-
-        if (Math.abs(delta) > 6){
-          if (delta > 0 && y > 90) nav.classList.add('nav--hidden');
-          else nav.classList.remove('nav--hidden');
-          lastY = y;
-        }
-        ticking = false;
-      }
-
-      window.addEventListener('scroll', () => {
-        if (!ticking){
-          window.requestAnimationFrame(onScroll);
-          ticking = true;
-        }
-      }, { passive:true });
-
-      // FILTER categories
-      const feed = document.getElementById('feed');
-      const emptyState = document.getElementById('emptyState');
-      const chips = Array.from(document.querySelectorAll('.chip'));
-      let currentFilter = 'all';
-
-      function getPosts(){ return Array.from(feed.querySelectorAll('article.post')); }
-
-      function applyFilter(filter){
-        currentFilter = filter;
-
-        chips.forEach(btn => {
-          btn.setAttribute('aria-selected', (btn.dataset.filter === filter) ? 'true' : 'false');
-        });
-
-        let visible = 0;
-        getPosts().forEach(post => {
-          const cat = (post.dataset.category || '').toLowerCase();
-          const show = (filter === 'all') || (cat === filter);
-          post.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-
-        emptyState.style.display = (visible === 0) ? 'block' : 'none';
-      }
-
-      document.getElementById('catbar').addEventListener('click', (e) => {
-        const btn = e.target.closest('.chip');
-        if (!btn) return;
-        applyFilter(btn.dataset.filter);
-        // quando filtri, se sei in fondo e non ci sono elementi visibili, resta l'empty state
-      });
-
-      // COUNTS
-      const countAll = document.getElementById('countAll');
-      const countGeo = document.getElementById('countGeo');
-      const countBiz = document.getElementById('countBiz');
-      const countTech = document.getElementById('countTech');
-
-      function refreshCounts(){
-        const posts = getPosts();
-        const c = { geopolitica:0, business:0, tecnologia:0, all: posts.length };
-        posts.forEach(p => {
-          const k = (p.dataset.category || '').toLowerCase();
-          if (c[k] !== undefined) c[k]++;
-        });
-        countAll.textContent = String(c.all);
-        countGeo.textContent = String(c.geopolitica);
-        countBiz.textContent = String(c.business);
-        countTech.textContent = String(c.tecnologia);
-      }
-
-      // INFINITE SCROLL (NO DUPLICATION):
-      // show hint when near bottom. You manually duplicate <article> in HTML.
-      const loader = document.getElementById('loader');
-      let hintShown = false;
-
-      function nearBottom(){
-        const scrollPos = window.scrollY + window.innerHeight;
-        const threshold = document.body.scrollHeight - 900;
-        return scrollPos >= threshold;
-      }
-
-      window.addEventListener('scroll', () => {
-        if (!nearBottom()) return;
-        if (hintShown) return;
-
-        loader.classList.add('is-on');
-        hintShown = true;
-      }, { passive:true });
-
-      // init
-      refreshCounts();
-      applyFilter('all');
-    })();
-  </script>
-</body>
-</html>
 
 
 

@@ -1,21 +1,51 @@
 [
-  {
-    "id": "video-test-001",
-    "title": "Test video YouTube",
-    "subtitle": "Se vedi questo, il JSON è letto correttamente",
-    "category": "geopolitica",
-    "dateISO": "2026-01-18",
-    "body": "Questo è un articolo di test.\n\nSotto deve comparire un player YouTube.",
-    "media": {
-      "type": "youtube",
-      "youtubeId": "dQw4w9WgXcQ"
+{
+  "id": "geopolitica-mar-rosso-quote-001",
+  "title": "Mar Rosso: il nodo strategico che ridefinisce il commercio globale",
+  "subtitle": "Rotte, sicurezza e implicazioni geopolitiche",
+  "category": "geopolitica",
+  "dateISO": "2026-01-18",
+  "body": "Le tensioni nel Mar Rosso stanno influenzando in modo crescente la sicurezza delle rotte commerciali internazionali.\n\nLa presenza militare nella regione e i rischi per la navigazione stanno spingendo compagnie e governi a rivedere strategie logistiche consolidate.\n\nIl quadro che emerge è quello di un sistema globale sempre più esposto a shock localizzati ma ad alto impatto.",
+  "highlight": "Il Mar Rosso è oggi uno dei principali punti di vulnerabilità del commercio globale.",
+  "media": {
+    "type": "image",
+    "src": "https://darkfeed.online/assets/img/mar-rosso-rotte.jpg",
+    "alt": "Rotte commerciali nel Mar Rosso e nel Golfo di Aden"
+  },
+  "sources": [
+    {
+      "label": "Reuters",
+      "url": "https://www.reuters.com/"
     },
-    "sources": [
-      { "label": "YouTube", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
-    ],
-    "featured": true
-  }
-]
+    {
+      "label": "Institute for the Study of War",
+      "url": "https://www.understandingwar.org/"
+    }
+  ]
+},
+{
+  "id": "geopolitica-mar-rosso-video-001",
+  "title": "Mar Rosso: il nodo strategico che ridefinisce il commercio globale",
+  "subtitle": "Rotte, sicurezza e implicazioni geopolitiche",
+  "category": "geopolitica",
+  "dateISO": "2026-01-18",
+  "body": "Le tensioni nel Mar Rosso stanno influenzando in modo crescente la sicurezza delle rotte commerciali internazionali.\n\nLa presenza militare nella regione e i rischi per la navigazione stanno spingendo compagnie e governi a rivedere strategie logistiche consolidate.\n\nIl quadro che emerge è quello di un sistema globale sempre più esposto a shock localizzati ma ad alto impatto.",
+  "highlight": "Il Mar Rosso è oggi uno dei principali punti di vulnerabilità del commercio globale.",
+  "media": {
+    "type": "youtube",
+    "youtubeId": "dQw4w9WgXcQ"
+  },
+  "sources": [
+    {
+      "label": "Reuters",
+      "url": "https://www.reuters.com/"
+    },
+    {
+      "label": "Institute for the Study of War",
+      "url": "https://www.understandingwar.org/"
+    }
+  ]
+}
 
 
 

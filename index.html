@@ -1414,7 +1414,7 @@
     /* =========================
        CONFIG: DOMAIN + PATHS
     ========================== */
-    const SITE_ORIGIN = "https://darkfeed.online";
+    const SITE_ORIGIN = window.location.origin;
     const DATA_PATHS = {
       breaking: `${SITE_ORIGIN}/breaking.json`,
       articles: `${SITE_ORIGIN}/articles.json`,
@@ -2139,6 +2139,7 @@
   </script>
 </body>
 </html>
+
 
 
 

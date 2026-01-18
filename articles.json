@@ -10,7 +10,8 @@
     "featured": true,
     "thumb": "https://darkfeed.online/assets/thumbs/geo-rotte.jpg",
     "media": {
-      "type": "image",
+      "type": "youtube",
+       "youtubeId": "Mg3OTXwrtcQ"
       "src": "https://darkfeed.online/assets/media/geo-rotte.jpg",
       "alt": "Rotte marittime e colli di bottiglia"
     },
@@ -156,4 +157,5 @@
     ]
   }
 ]
+
 
